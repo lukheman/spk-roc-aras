@@ -10,7 +10,7 @@ use App\Models\Siswa;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-use App\Helpers\RocEdas;
+use App\Helpers\SpkAras;
 
 #[Title('Dashboard')]
 class Dashboard extends Component
@@ -18,7 +18,8 @@ class Dashboard extends Component
     public $alternatif;
     public $siswa;
 
-    public function mount() {
+    public function mount()
+    {
         $this->penyakit = Siswa::count();
         $this->alternatif = Alternatif::count();
     }

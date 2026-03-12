@@ -6,7 +6,7 @@ use App\Enums\State;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use App\Helpers\RocEdas;
+use App\Helpers\SpkAras;
 
 #[Title('Ranking')]
 class Ranking extends Component
@@ -18,16 +18,17 @@ class Ranking extends Component
 
     public $laporan;
 
-    public function mount() {
+    public function mount()
+    {
 
-        $roc_edas = new RocEdas();
-        $this->siswaList = $roc_edas->ranking();
+        $spkAras = new SpkAras();
+        $this->siswaList = $spkAras->ranking();
         $this->siswaList = $this->siswaList->sortByDesc('skor')->values();
 
         $siswaLolos = $this->siswaList->take(3);
 
-        foreach($this->siswaList as $siswa) {
-            if($siswaLolos->contains('id_siswa', $siswa->id_siswa)) {
+        foreach ($this->siswaList as $siswa) {
+            if ($siswaLolos->contains('id_siswa', $siswa->id_siswa)) {
                 $siswa->lolos = true;
             } else {
                 $siswa->lolos = false;

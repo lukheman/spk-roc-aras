@@ -1,6 +1,6 @@
 @php
 
-use App\Enums\State;
+    use App\Enums\State;
 
 @endphp
 <div class="card">
@@ -8,26 +8,26 @@ use App\Enums\State;
         <div class="row">
 
             <div class="col-6">
-@if ($laporan)
+                @if ($laporan)
 
-                <a href="{{ route('laporan-hasil-seleksi')}}" wire:click="add" class="btn btn-danger me-3">
+                    <a href="{{ route('laporan-hasil-seleksi')}}" wire:click="add" class="btn btn-danger me-3">
 
-<i class="bi bi-printer"></i>
-Download Laporan</a>
+                        <i class="bi bi-printer"></i>
+                        Download Laporan</a>
 
-@else
+                @else
 
- <p class="fw-semibold text-primary mb-3">
-        Berikut adalah daftar hasil seleksi siswa beserta status kelulusannya:
-    </p>
+                    <p class="fw-semibold text-primary mb-3">
+                        Berikut adalah daftar hasil seleksi siswa beserta status kelulusannya:
+                    </p>
 
-                <!-- <div class="input-group"> -->
-                <!--     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span> -->
-                <!--     <input type="text" wire:model.live="search" class="form-control" placeholder="Cari siswa..." -->
-                <!--         aria-label="Recipient's username" aria-describedby="button-addon2"> -->
-                <!-- </div> -->
+                    <!-- <div class="input-group"> -->
+                    <!--     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span> -->
+                    <!--     <input type="text" wire:model.live="search" class="form-control" placeholder="Cari siswa..." -->
+                    <!--         aria-label="Recipient's username" aria-describedby="button-addon2"> -->
+                    <!-- </div> -->
 
-@endif
+                @endif
             </div>
             <div class="col-6">
 
@@ -48,10 +48,9 @@ Download Laporan</a>
                                 </h5>
                                 <button type="button" class="close rounded-pill"
                                     wire:click="$dispatch('closeModal', {id: 'modal-form-Ranking'})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-x">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-x">
                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                         <line x1="6" y1="6" x2="18" y2="18"></line>
                                     </svg>
@@ -63,8 +62,8 @@ Download Laporan</a>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="nisn">NISN Ranking</label>
-                                                <input wire:model="form.nisn" type="text"
-                                                    class="form-control" id="nisn" @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                                                <input wire:model="form.nisn" type="text" class="form-control" id="nisn"
+                                                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
                                                 @error('form.nisn')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -73,8 +72,8 @@ Download Laporan</a>
                                         <div class="col-8">
                                             <div class="form-group">
                                                 <label for="nama">Nama Ranking</label>
-                                                <input wire:model="form.nama" type="text"
-                                                    class="form-control" id="nama" @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                                                <input wire:model="form.nama" type="text" class="form-control" id="nama"
+                                                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
                                                 @error('form.nama')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -86,8 +85,9 @@ Download Laporan</a>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nama">Status Ekonomi</label>
-                                                <input wire:model="form.status_ekonomi" type="text"
-                                                    class="form-control" id="nama" @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                                                <input wire:model="form.status_ekonomi" type="text" class="form-control"
+                                                    id="nama" @if ($currentState === \App\Enums\State::SHOW) disabled
+                                                    @endif>
                                                 @error('form.status_ekonomi')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -96,8 +96,9 @@ Download Laporan</a>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nama">Phone</label>
-                                                <input wire:model="form.phone" type="text"
-                                                    class="form-control" id="nama" @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                                                <input wire:model="form.phone" type="text" class="form-control"
+                                                    id="nama" @if ($currentState === \App\Enums\State::SHOW) disabled
+                                                    @endif>
                                                 @error('form.phone')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
@@ -108,11 +109,11 @@ Download Laporan</a>
                             </div>
                             <div class="modal-footer">
                                 @if ($currentState === \App\Enums\State::CREATE)
-                                    <button type="button" wire:click="save"
-                                        class="btn btn-primary">Tambahkan</button>
+                                    <button type="button" wire:click="save" class="btn btn-primary"><i
+                                            class="bi bi-check-circle me-1"></i>Tambahkan</button>
                                 @elseif ($currentState === \App\Enums\State::UPDATE)
-                                    <button type="button" wire:click="save"
-                                        class="btn btn-primary">Perbarui</button>
+                                    <button type="button" wire:click="save" class="btn btn-primary"><i
+                                            class="bi bi-arrow-repeat me-1"></i>Perbarui</button>
                                 @endif
                             </div>
                         </div>
@@ -144,7 +145,9 @@ Download Laporan</a>
                             <td>{{ $item->nisn }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->skor }}</td>
-                            <td class="text-end"><span class="badge bg-{{ $item->lolos ? 'success' : 'danger'}}">{{  $item->lolos ? 'LOLOS' : 'TIDAK LOLOS' }}</span></td>
+                            <td class="text-end"><span
+                                    class="badge bg-{{ $item->lolos ? 'success' : 'danger'}}">{{  $item->lolos ? 'LOLOS' : 'TIDAK LOLOS' }}</span>
+                            </td>
 
                         </tr>
                     @endforeach

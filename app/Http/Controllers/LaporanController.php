@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Helpers\RocEdas;
+use App\Helpers\SpkAras;
 
 class LaporanController extends Controller
 {
 
-    public function hasilSeleksi() {
+    public function hasilSeleksi()
+    {
 
-        $roc_edas = new RocEdas();
-        $siswaLolos = $roc_edas->ranking();
+        $spkAras = new SpkAras();
+        $siswaLolos = $spkAras->ranking();
         $siswaLolos = $siswaLolos->sortByDesc('skor')->values()->take(3);
 
         // return view('laporan.laporan-hasil-seleksi', [

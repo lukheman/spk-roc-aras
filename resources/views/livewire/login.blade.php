@@ -1,6 +1,6 @@
 <div>
     <style>
-        /* Login Page Specific Styles - Light Theme */
+        /* Login Page - Dark Emerald Theme */
         .login-section {
             width: 100%;
             min-height: 100vh;
@@ -22,19 +22,19 @@
         }
 
         .login-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 24px;
+            width: 76px;
+            height: 76px;
+            background: linear-gradient(135deg, #10b981, #14b8a6);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.25);
         }
 
         .login-icon i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: white;
         }
 
@@ -42,20 +42,21 @@
             font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #1a1a2e;
+            color: #f8fafc;
         }
 
         .login-header p {
-            color: #718096;
+            color: #94a3b8;
             font-size: 0.95rem;
         }
 
         .login-card {
-            background: white;
-            border-radius: 24px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 20px;
             padding: 2.5rem;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .login-card .form-floating {
@@ -63,21 +64,22 @@
         }
 
         .login-card .form-control {
-            background: #f8f9fa;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 14px;
-            color: #1a1a2e;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            border-radius: 12px;
+            color: #f8fafc;
             height: 58px;
             padding: 1rem 1rem 0.5rem 3rem;
             font-size: 1rem;
             transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
         }
 
         .login-card .form-control:focus {
-            background: #fff;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-            color: #1a1a2e;
+            background: rgba(15, 23, 42, 0.8);
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            color: #f8fafc;
         }
 
         .login-card .form-control::placeholder {
@@ -85,14 +87,14 @@
         }
 
         .login-card .form-floating label {
-            color: #718096;
+            color: #94a3b8;
             padding-left: 3rem;
             font-size: 0.9rem;
         }
 
         .login-card .form-control:focus~label,
         .login-card .form-control:not(:placeholder-shown)~label {
-            color: #667eea;
+            color: #34d399;
             transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
         }
 
@@ -101,7 +103,7 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #a0aec0;
+            color: #64748b;
             font-size: 1.25rem;
             z-index: 5;
             pointer-events: none;
@@ -109,7 +111,7 @@
         }
 
         .login-card .form-floating:focus-within .input-icon {
-            color: #667eea;
+            color: #34d399;
         }
 
         .login-card .input-wrapper {
@@ -117,7 +119,7 @@
         }
 
         .login-card .error-message {
-            color: #e53e3e;
+            color: #f87171;
             font-size: 0.85rem;
             margin-top: 0.5rem;
             display: flex;
@@ -126,9 +128,9 @@
         }
 
         .login-card .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #10b981, #059669);
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             padding: 1rem 2rem;
             font-size: 1rem;
             font-weight: 600;
@@ -140,11 +142,12 @@
             gap: 0.5rem;
             transition: all 0.3s ease;
             margin-top: 0.5rem;
+            font-family: 'Outfit', sans-serif;
         }
 
         .login-card .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.35);
             color: white;
         }
 
@@ -162,7 +165,7 @@
             align-items: center;
             gap: 1rem;
             margin: 1.5rem 0;
-            color: #a0aec0;
+            color: #64748b;
             font-size: 0.85rem;
         }
 
@@ -171,24 +174,24 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(51, 65, 85, 0.8);
         }
 
         .login-card .register-link {
             text-align: center;
-            color: #4a5568;
+            color: #94a3b8;
             font-size: 0.95rem;
         }
 
         .login-card .register-link a {
-            color: #667eea;
+            color: #34d399;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
         }
 
         .login-card .register-link a:hover {
-            color: #764ba2;
+            color: #10b981;
         }
 
         @keyframes fadeInUp {
@@ -219,12 +222,12 @@
             }
 
             .login-icon {
-                width: 70px;
-                height: 70px;
+                width: 66px;
+                height: 66px;
             }
 
             .login-icon i {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
         }
     </style>

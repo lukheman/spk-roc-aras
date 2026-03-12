@@ -11,28 +11,31 @@ class AlternatifForm extends Form
 {
     public ?Siswa $siswa = null;
 
-    public ?int $prestasi_akademik = null;
-    public ?int $penghasilan_orang_tua = null;
-    public ?int $tanggungan_orang_tua = null;
-    public ?int $yatim_piatu = null;
+    public ?int $nilai_akademik = null;
+    public ?int $prestasi_sertifikat = null;
+    public ?int $keaktifan_ekstrakurikuler = null;
+    public ?int $absensi = null;
+    public ?int $point_pelanggaran = null;
 
     public function rules(): array
     {
         return [
-            'prestasi_akademik'     => 'nullable|integer',
-            'penghasilan_orang_tua' => 'nullable|integer',
-            'tanggungan_orang_tua'  => 'nullable|integer',
-            'yatim_piatu'           => 'nullable|integer',
+            'nilai_akademik' => 'nullable|integer',
+            'prestasi_sertifikat' => 'nullable|integer',
+            'keaktifan_ekstrakurikuler' => 'nullable|integer',
+            'absensi' => 'nullable|integer',
+            'point_pelanggaran' => 'nullable|integer',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'prestasi_akademik.integer'     => 'Nilai prestasi akademik harus berupa angka.',
-            'penghasilan_orang_tua.integer' => 'Nilai penghasilan orang tua harus berupa angka.',
-            'tanggungan_orang_tua.integer'  => 'Jumlah tanggungan orang tua harus berupa angka.',
-            'yatim_piatu.integer'           => 'Nilai yatim piatu harus berupa angka.',
+            'nilai_akademik.integer' => 'Nilai akademik harus berupa angka.',
+            'prestasi_sertifikat.integer' => 'Nilai prestasi/sertifikat harus berupa angka.',
+            'keaktifan_ekstrakurikuler.integer' => 'Nilai keaktifan ekstrakurikuler harus berupa angka.',
+            'absensi.integer' => 'Nilai absensi harus berupa angka.',
+            'point_pelanggaran.integer' => 'Nilai point pelanggaran harus berupa angka.',
         ];
     }
 
@@ -52,9 +55,10 @@ class AlternatifForm extends Form
     {
         $this->siswa = $siswa;
 
-        $this->prestasi_akademik     = $siswa->alternatif->prestasi_akademik;
-        $this->penghasilan_orang_tua = $siswa->alternatif->penghasilan_orang_tua;
-        $this->tanggungan_orang_tua  = $siswa->alternatif->tanggungan_orang_tua;
-        $this->yatim_piatu           = $siswa->alternatif->yatim_piatu;
+        $this->nilai_akademik = $siswa->alternatif->nilai_akademik;
+        $this->prestasi_sertifikat = $siswa->alternatif->prestasi_sertifikat;
+        $this->keaktifan_ekstrakurikuler = $siswa->alternatif->keaktifan_ekstrakurikuler;
+        $this->absensi = $siswa->alternatif->absensi;
+        $this->point_pelanggaran = $siswa->alternatif->point_pelanggaran;
     }
 }

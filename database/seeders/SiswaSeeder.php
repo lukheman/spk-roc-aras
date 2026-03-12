@@ -12,35 +12,36 @@ class SiswaSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-  public function run(): void
+    public function run(): void
     {
+        // Data dari Tabel 2.3 Data Alternatif Calon Penerima Beasiswa
+        // C1=Kehadiran(%), C2=Nilai Rapor, C3=Skor Ekskul, C4=Poin Pelanggaran, C5=Skor Prestasi
         $data = [
-            ['nama' => 'Afni', 'prestasi' => 100, 'penghasilan' => 2500000, 'tanggungan' => 2, 'yatim' => 50],
-            ['nama' => 'Suci Ramadani', 'prestasi' => 80,  'penghasilan' => 3000000, 'tanggungan' => 3, 'yatim' => 100],
-            ['nama' => 'Budi', 'prestasi' => 100, 'penghasilan' => 4000000, 'tanggungan' => 1, 'yatim' => 100],
-            ['nama' => 'Izty', 'prestasi' => 80,  'penghasilan' => 5000000, 'tanggungan' => 2, 'yatim' => 50],
-            ['nama' => 'Putri', 'prestasi' => 40, 'penghasilan' => 2500000, 'tanggungan' => 4, 'yatim' => 50],
-            ['nama' => 'Arisa', 'prestasi' => 80, 'penghasilan' => 5000000, 'tanggungan' => 3, 'yatim' => 100],
-            ['nama' => 'Dewi', 'prestasi' => 60, 'penghasilan' => 3000000, 'tanggungan' => 5, 'yatim' => 100],
+            ['nama' => 'Siswa A', 'absensi' => 98, 'nilai_akademik' => 88, 'keaktifan_ekstrakurikuler' => 3, 'point_pelanggaran' => 5, 'prestasi_sertifikat' => 2],
+            ['nama' => 'Siswa B', 'absensi' => 100, 'nilai_akademik' => 93, 'keaktifan_ekstrakurikuler' => 4, 'point_pelanggaran' => 0, 'prestasi_sertifikat' => 4],
+            ['nama' => 'Siswa C', 'absensi' => 90, 'nilai_akademik' => 85, 'keaktifan_ekstrakurikuler' => 2, 'point_pelanggaran' => 20, 'prestasi_sertifikat' => 1],
+            ['nama' => 'Siswa D', 'absensi' => 95, 'nilai_akademik' => 82, 'keaktifan_ekstrakurikuler' => 2, 'point_pelanggaran' => 10, 'prestasi_sertifikat' => 1],
+            ['nama' => 'Siswa E', 'absensi' => 96, 'nilai_akademik' => 90, 'keaktifan_ekstrakurikuler' => 3, 'point_pelanggaran' => 5, 'prestasi_sertifikat' => 3],
         ];
 
         foreach ($data as $d) {
             $siswa = ModelSiswa::create([
-                'nisn'            => fake()->unique()->numerify('3201####'),
-                'nama'           => $d['nama'],
+                'nisn' => fake()->unique()->numerify('3201####'),
+                'nama' => $d['nama'],
                 'status_ekonomi' => null,
-                'phone'          => fake()->phoneNumber(),
-                'jenis_kelamin'  => 'P', // bisa disesuaikan
-                'alamat'         => 'Alamat ' . $d['nama'],
-                'tanggal_lahir'  => fake()->date('Y-m-d', '-15 years'),
+                'phone' => fake()->phoneNumber(),
+                'jenis_kelamin' => 'P',
+                'alamat' => 'Alamat ' . $d['nama'],
+                'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
             ]);
 
             ModelAlternatif::create([
-                'id_siswa'              => $siswa->id_siswa,
-                'prestasi_akademik'     => $d['prestasi'],
-                'penghasilan_orang_tua' => $d['penghasilan'],
-                'tanggungan_orang_tua'  => $d['tanggungan'],
-                'yatim_piatu'           => $d['yatim'],
+                'id_siswa' => $siswa->id_siswa,
+                'nilai_akademik' => $d['nilai_akademik'],
+                'prestasi_sertifikat' => $d['prestasi_sertifikat'],
+                'keaktifan_ekstrakurikuler' => $d['keaktifan_ekstrakurikuler'],
+                'absensi' => $d['absensi'],
+                'point_pelanggaran' => $d['point_pelanggaran'],
             ]);
         }
     }

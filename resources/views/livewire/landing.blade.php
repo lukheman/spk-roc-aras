@@ -3,48 +3,50 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
-      <!-- Badge -->
-      <div class="hero-badge">
-        <i class="bi bi-stars"></i>
-        <span>Sistem Pendukung Keputusan</span>
+      <!-- Tag -->
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span>Sistem Pendukung Keputusan Beasiswa</span>
       </div>
 
       <!-- Main Heading -->
       <h1>
-        <span>SMAN 1 Tanggetada</span>
+        <span class="highlight">SMA Negeri 1</span><br>
+        Tanggetada
       </h1>
 
       <!-- Description -->
-      <p>
-        Platform modern untuk mengelola data sekolah dengan metode ROC dan EDAS.
-        Pengambilan keputusan yang lebih cepat, akurat, dan terstruktur.
+      <p class="subtitle">
+        Platform cerdas untuk seleksi penerima beasiswa menggunakan metode
+        <strong style="color: #f8fafc;">ROC</strong> dan <strong style="color: #f8fafc;">ARAS</strong>.
+        Menghasilkan keputusan yang objektif, transparan, dan terukur.
       </p>
 
       <!-- Action Buttons -->
       <div class="hero-buttons">
-        <a href="{{ route('login') }}" class="btn-hero-primary">
-          <i class="bi bi-rocket-takeoff"></i>
-          Mulai Sekarang
+        <a href="{{ route('login') }}" class="btn-primary-custom">
+          <i class="bi bi-arrow-right-circle"></i>
+          Masuk Sistem
         </a>
-        <a href="#features" class="btn-hero-secondary">
-          <i class="bi bi-play-circle"></i>
-          Lihat Fitur
+        <a href="#features" class="btn-outline-custom">
+          <i class="bi bi-grid-3x3-gap"></i>
+          Pelajari Metode
         </a>
       </div>
 
-      <!-- Stats -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">ROC</div>
-          <div class="stat-label">Pembobotan</div>
+      <!-- Method Stats -->
+      <div class="method-cards">
+        <div class="method-card">
+          <div class="card-value">ROC</div>
+          <div class="card-label">Pembobotan</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">EDAS</div>
-          <div class="stat-label">Perankingan</div>
+        <div class="method-card">
+          <div class="card-value">ARAS</div>
+          <div class="card-label">Perankingan</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Akurat</div>
+        <div class="method-card">
+          <div class="card-value">5</div>
+          <div class="card-label">Kriteria</div>
         </div>
       </div>
     </div>
@@ -54,54 +56,52 @@
   <section id="features" class="section">
     <div class="container">
       <div class="text-center mb-5">
-        <h2 class="fw-bold mb-3" style="font-size: 2.5rem; color: #1a1a2e;">
-          Fitur <span
-            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Unggulan</span>
-        </h2>
-        <p style="color: #718096;">
-          Sistem yang dirancang untuk membantu pengambilan keputusan di sekolah
+        <div class="section-label">
+          <i class="bi bi-cpu"></i> Metode yang Digunakan
+        </div>
+        <h2 class="section-title">Fitur Unggulan</h2>
+        <p class="section-desc">
+          Kombinasi metode ROC dan ARAS untuk menghasilkan keputusan seleksi beasiswa yang akurat
         </p>
       </div>
 
       <div class="row g-4">
         <!-- Feature 1 -->
         <div class="col-md-4">
-          <div class="glass-card h-100 text-center">
-            <div class="feature-icon mb-4"
-              style="width: 70px; height: 70px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
-              <i class="bi bi-bar-chart-line-fill" style="font-size: 2rem; color: white;"></i>
+          <div class="feature-card">
+            <div class="feature-icon-box green">
+              <i class="bi bi-bar-chart-steps"></i>
             </div>
-            <h4 class="fw-bold mb-3" style="color: #1a1a2e;">Metode ROC</h4>
-            <p style="color: #718096;">
-              Rank Order Centroid untuk menentukan bobot kriteria secara objektif berdasarkan urutan prioritas.
+            <h4>Metode ROC</h4>
+            <p>
+              Rank Order Centroid untuk menentukan bobot prioritas kriteria secara objektif berdasarkan urutan
+              kepentingan.
             </p>
           </div>
         </div>
 
         <!-- Feature 2 -->
         <div class="col-md-4">
-          <div class="glass-card h-100 text-center">
-            <div class="feature-icon mb-4"
-              style="width: 70px; height: 70px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);">
-              <i class="bi bi-graph-up-arrow" style="font-size: 2rem; color: white;"></i>
+          <div class="feature-card">
+            <div class="feature-icon-box teal">
+              <i class="bi bi-trophy"></i>
             </div>
-            <h4 class="fw-bold mb-3" style="color: #1a1a2e;">Metode EDAS</h4>
-            <p style="color: #718096;">
-              Evaluation Based on Distance from Average Solution untuk perankingan alternatif terbaik.
+            <h4>Metode ARAS</h4>
+            <p>
+              Additive Ratio Assessment untuk perankingan alternatif berdasarkan rasio utilitas terhadap solusi optimal.
             </p>
           </div>
         </div>
 
         <!-- Feature 3 -->
         <div class="col-md-4">
-          <div class="glass-card h-100 text-center">
-            <div class="feature-icon mb-4"
-              style="width: 70px; height: 70px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);">
-              <i class="bi bi-shield-check" style="font-size: 2rem; color: white;"></i>
+          <div class="feature-card">
+            <div class="feature-icon-box blue">
+              <i class="bi bi-clipboard-data"></i>
             </div>
-            <h4 class="fw-bold mb-3" style="color: #1a1a2e;">Keputusan Akurat</h4>
-            <p style="color: #718096;">
-              Hasil analisis yang terukur dan dapat dipertanggungjawabkan untuk pengambilan keputusan.
+            <h4>Seleksi Terukur</h4>
+            <p>
+              5 kriteria penilaian: kehadiran, nilai rapor, keaktifan ekskul, poin pelanggaran, dan prestasi.
             </p>
           </div>
         </div>

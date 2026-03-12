@@ -80,10 +80,10 @@ use App\Enums\State;
                             <div class="modal-footer">
                                 @if ($currentState === \App\Enums\State::CREATE)
                                     <button type="button" wire:click="save"
-                                        class="btn btn-primary">Tambahkan</button>
+                                        class="btn btn-primary"><i class="bi bi-check-circle me-1"></i>Tambahkan</button>
                                 @elseif ($currentState === \App\Enums\State::UPDATE)
                                     <button type="button" wire:click="save"
-                                        class="btn btn-primary">Perbarui</button>
+                                        class="btn btn-primary"><i class="bi bi-arrow-repeat me-1"></i>Perbarui</button>
                                 @endif
                             </div>
                         </div>
@@ -98,7 +98,7 @@ use App\Enums\State;
             </div>
 
             <div class="col-6 d-flex justify-content-end">
-                <button wire:click="add" class="btn btn-primary me-3">Tambah Pengguna</button>
+                <button wire:click="add" class="btn btn-primary me-3"><i class="bi bi-plus-circle me-1"></i>Tambah Pengguna</button>
             </div>
         </div>
     </div>
@@ -123,9 +123,9 @@ use App\Enums\State;
                 <td>{{ $item->email }}</td>
                 <td><span class="badge bg-{{$item->role->getColor()}}">{{ $item->role}}</span></td>
                 <td class="text-end">
-                    <button wire:click="detail({{ $item->id }})" class="btn btn-sm btn-info">Lihat</button>
-                    <button wire:click="edit({{ $item->id }})" class="btn btn-sm btn-warning" type="button">Edit</button>
-                    <button wire:click="delete({{ $item->id }})" class="btn btn-sm btn-danger" type="button">Hapus</button>
+                    <button wire:click="detail({{ $item->id }})" class="btn btn-sm btn-info"><i class="bi bi-eye me-1"></i>Lihat</button>
+                    <button wire:click="edit({{ $item->id }})" class="btn btn-sm btn-warning" type="button"><i class="bi bi-pencil-square me-1"></i>Edit</button>
+                    <button wire:click="delete({{ $item->id }})" class="btn btn-sm btn-danger" type="button"><i class="bi bi-trash me-1"></i>Hapus</button>
                 </td>
             </tr>
         @endforeach
