@@ -36,8 +36,6 @@ class SpkAras
 
         // Hitung bobot menggunakan metode ROC (Rank Order Centroid)
         $this->hitungBobotROC();
-
-        dd($this->weights);
     }
 
     public function ranking()
@@ -137,7 +135,7 @@ class SpkAras
                     $sum += $row[$j];
                 }
                 foreach ($allRows as $i => $row) {
-                    $normalized[$i][$j] = $sum > 0 ? round($row[$j] / $sum, 6) : 0;
+                    $normalized[$i][$j] = $sum > 0 ? round($row[$j] / $sum, 3) : 0;
                 }
             } else {
                 // Cost: gunakan 1/x_ij
@@ -148,7 +146,7 @@ class SpkAras
                 }
                 foreach ($allRows as $i => $row) {
                     $val = $row[$j] > 0 ? 1 / $row[$j] : 0;
-                    $normalized[$i][$j] = $sum > 0 ? round($val / $sum, 6) : 0;
+                    $normalized[$i][$j] = $sum > 0 ? round($val / $sum, 3) : 0;
                 }
             }
         }
@@ -166,7 +164,7 @@ class SpkAras
 
         foreach ($normalizedMatrix as $i => $row) {
             foreach ($row as $j => $val) {
-                $weighted[$i][$j] = round($val * $this->weights[$j], 6);
+                $weighted[$i][$j] = round($val * $this->weights[$j], 3);
             }
         }
 
@@ -179,12 +177,12 @@ class SpkAras
     private function hitungNilaiOptimalitas(array $weightedMatrix)
     {
         // Si untuk A0 (baris pertama)
-        $this->s0 = round(array_sum($weightedMatrix[0]), 6);
+        $this->s0 = round(array_sum($weightedMatrix[0]), 3);
 
         // Si untuk setiap alternatif
         foreach ($this->siswaList as $idx => $siswa) {
             $row = $weightedMatrix[$idx + 1]; // +1 karena baris 0 adalah A0
-            $siswa->si = round(array_sum($row), 6);
+            $siswa->si = round(array_sum($row), 3);
 
             // Simpan detail per kriteria untuk tampilan
             foreach ($this->criteriaColumns as $j => $col) {
@@ -199,7 +197,7 @@ class SpkAras
     private function hitungDerajatUtilitas()
     {
         foreach ($this->siswaList as $siswa) {
-            $siswa->skor = $this->s0 > 0 ? round($siswa->si / $this->s0, 6) : 0;
+            $siswa->skor = $this->s0 > 0 ? round($siswa->si / $this->s0, 3) : 0;
         }
     }
 

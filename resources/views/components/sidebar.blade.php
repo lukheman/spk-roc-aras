@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
                     <a href="">
-                        ROCEDAC
+                ROCARAS
                     </a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -81,7 +81,7 @@
                             <li class="sidebar-title">Navigasi Utama</li>
 
 <x-nav-link
-    icon="bi-exclamation-triangle-fill"
+    icon="bi-people-fill"
     href="{{ route('siswa-table') }}"
     :active="request()->routeIs('siswa-table')"
 >
@@ -89,7 +89,7 @@
 </x-nav-link>
 
 <x-nav-link
-    icon="bi-exclamation-triangle-fill"
+    icon="bi-person-fill-gear"
     href="{{ route('pengguna-table') }}"
     :active="request()->routeIs('pengguna-table')"
 >
@@ -97,19 +97,19 @@
 </x-nav-link>
 
 <x-nav-link
-    icon="bi-exclamation-triangle-fill"
+    icon="bi-bar-chart-fill"
     href="{{ route('ranking') }}"
     :active="request()->routeIs('ranking')"
 >
-                        Ranking
+    Ranking
 </x-nav-link>
 
 <x-nav-link
-    icon="bi-exclamation-triangle-fill"
+    icon="bi-list-check"
     href="{{ route('alternatif') }}"
     :active="request()->routeIs('alternatif')"
 >
-                        Alternatif
+    Alternatif
 </x-nav-link>
                         @elseif(auth('pengguna')->user()->role === \App\Enums\Role::KEPALASEKOLAH)
 
