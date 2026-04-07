@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMA Negeri 1 Tanggetada - Sistem Pendukung Keputusan</title>
+  <title>SMA Negeri 1 Watubangga - Sistem Pendukung Keputusan</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
@@ -533,7 +533,7 @@
       <div class="container">
         <a class="navbar-brand" href="{{ route('landing') }}">
           <span class="brand-icon"><i class="bi bi-mortarboard-fill"></i></span>
-          SMA Negeri 1 Tanggetada
+          SMA Negeri 1 Watubangga
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
@@ -563,7 +563,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <p class="mb-0">© {{ date('Y') }} SMA Negeri 1 Tanggetada. All rights reserved. | <a href="#">Privacy Policy</a>
+        <p class="mb-0">© {{ date('Y') }} SMA Negeri 1 Watubangga. All rights reserved. | <a href="#">Privacy Policy</a>
         </p>
       </div>
     </footer>
