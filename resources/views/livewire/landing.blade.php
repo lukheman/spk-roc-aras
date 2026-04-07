@@ -12,7 +12,7 @@
       <!-- Main Heading -->
       <h1>
         <span class="highlight">SMA Negeri 1</span><br>
-        Tanggetada
+        Watubangga
       </h1>
 
       <!-- Description -->
