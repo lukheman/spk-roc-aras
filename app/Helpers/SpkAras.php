@@ -172,8 +172,6 @@ class SpkAras
             }
         }
 
-        dd($weighted);
-
         return $weighted;
     }
 
