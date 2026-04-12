@@ -1,6 +1,6 @@
 <div class="row">
 
-    <!-- PENYAKIT -->
+    <!-- SISWA -->
     <div class="col-12 col-md-6">
         <div class="card">
             <div class="card-body px-4 py-4-5">
