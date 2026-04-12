@@ -108,7 +108,7 @@ class SpkAras
             if ($this->criteriaTypes[$j] === 'benefit') {
                 $optimal[$j] = max($colValues);
             } else {
-                $optimal[$j] = min($colValues);
+                $optimal[$j] = min($colValues) == 0.0 ? 1 : min($colValues);
             }
         }
 
@@ -134,6 +134,7 @@ class SpkAras
                 foreach ($allRows as $row) {
                     $sum += $row[$j];
                 }
+
                 foreach ($allRows as $i => $row) {
                     $normalized[$i][$j] = $sum > 0 ? round($row[$j] / $sum, 3) : 0;
                 }
@@ -141,14 +142,17 @@ class SpkAras
                 // Cost: gunakan 1/x_ij
                 $sum = 0;
                 foreach ($allRows as $row) {
-                    $val = $row[$j] > 0 ? 1 / $row[$j] : 0;
+                    // $val = $row[$j] > 0 ? 1 / $row[$j] : 0;
+                    $val = $row[$j] > 0 ? 1 / $row[$j] : 1 / 1;
                     $sum += $val;
                 }
                 foreach ($allRows as $i => $row) {
-                    $val = $row[$j] > 0 ? 1 / $row[$j] : 0;
-                    $normalized[$i][$j] = $sum > 0 ? round($val / $sum, 3) : 0;
+                    $val = $row[$j] > 0 ? 1 / $row[$j] : 1 / 1;
+                    $normalized[$i][$j] = round($val / $sum, 3);
                 }
+
             }
+
         }
 
         return $normalized;
@@ -167,6 +171,8 @@ class SpkAras
                 $weighted[$i][$j] = round($val * $this->weights[$j], 3);
             }
         }
+
+        dd($weighted);
 
         return $weighted;
     }
