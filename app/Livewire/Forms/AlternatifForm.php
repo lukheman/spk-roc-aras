@@ -47,7 +47,10 @@ class AlternatifForm extends Form
 
     public function update(): void
     {
-        $this->siswa->alternatif->update($this->validate());
+        $this->siswa->alternatif()->updateOrCreate(
+            ['id_siswa' => $this->siswa->id_siswa],
+            $this->validate()
+        );
         $this->reset();
     }
 
@@ -55,10 +58,10 @@ class AlternatifForm extends Form
     {
         $this->siswa = $siswa;
 
-        $this->nilai_akademik = $siswa->alternatif->nilai_akademik;
-        $this->prestasi_sertifikat = $siswa->alternatif->prestasi_sertifikat;
-        $this->keaktifan_ekstrakurikuler = $siswa->alternatif->keaktifan_ekstrakurikuler;
-        $this->absensi = $siswa->alternatif->absensi;
-        $this->point_pelanggaran = $siswa->alternatif->point_pelanggaran;
+        $this->nilai_akademik = $siswa->alternatif?->nilai_akademik;
+        $this->prestasi_sertifikat = $siswa->alternatif?->prestasi_sertifikat;
+        $this->keaktifan_ekstrakurikuler = $siswa->alternatif?->keaktifan_ekstrakurikuler;
+        $this->absensi = $siswa->alternatif?->absensi;
+        $this->point_pelanggaran = $siswa->alternatif?->point_pelanggaran;
     }
 }

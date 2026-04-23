@@ -23,7 +23,7 @@ class SpkAras
 
     public function __construct()
     {
-        $this->siswaList = Siswa::query()->with('alternatif')->get();
+        $this->siswaList = Siswa::query()->has('alternatif')->with('alternatif')->get();
 
         // Tipe kriteria: benefit (lebih tinggi lebih baik) atau cost (lebih rendah lebih baik)
         $this->criteriaTypes = [
@@ -85,7 +85,7 @@ class SpkAras
         foreach ($this->siswaList as $siswa) {
             $row = [];
             foreach ($this->criteriaColumns as $col) {
-                $row[] = (float) $siswa->alternatif->$col;
+                $row[] = (float) ($siswa->alternatif?->$col ?? 0);
             }
             $matrix[] = $row;
         }
