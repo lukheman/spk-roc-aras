@@ -206,15 +206,7 @@
                     @error('nama') <small class="text-warning">{{ $message }}</small> @enderror
                 </div>
 
-                <!-- Phone -->
-                <div class="mb-3">
-                    <label for="phone" class="form-label">
-                        <i class="bi bi-telephone-fill me-1"></i> Nomor Telepon
-                    </label>
-                    <input type="text" id="phone" wire:model="phone" class="form-control"
-                        placeholder="Masukkan nomor telepon" required>
-                    @error('phone') <small class="text-warning">{{ $message }}</small> @enderror
-                </div>
+
 
                 <!-- Jenis Kelamin -->
                 <div class="mb-3">
@@ -229,15 +221,7 @@
                     @error('jenis_kelamin') <small class="text-warning">{{ $message }}</small> @enderror
                 </div>
 
-                <!-- Alamat -->
-                <div class="mb-3">
-                    <label for="alamat" class="form-label">
-                        <i class="bi bi-house-door-fill me-1"></i> Alamat
-                    </label>
-                    <textarea id="alamat" wire:model="alamat" class="form-control" rows="2"
-                        placeholder="Masukkan alamat lengkap" required></textarea>
-                    @error('alamat') <small class="text-warning">{{ $message }}</small> @enderror
-                </div>
+
 
                 <!-- Tanggal Lahir -->
                 <div class="mb-3">

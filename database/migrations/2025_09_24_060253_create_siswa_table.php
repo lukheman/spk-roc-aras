@@ -17,10 +17,7 @@ return new class extends Migration
             // attribute siswa
             $table->string('nisn', 50);
             $table->string('nama', 50);
-            $table->string('status_ekonomi', 100)->nullable();
-            $table->string('phone', 20);
             $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('alamat',);
             $table->date('tanggal_lahir');
             $table->string('password')->nullable()->default(bcrypt('password123'));
             $table->timestamps();

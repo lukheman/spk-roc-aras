@@ -60,30 +60,7 @@ use App\Enums\State;
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="status_ekonomi">Status Ekonomi</label>
-                <input wire:model="form.status_ekonomi" type="text"
-                    class="form-control" id="status_ekonomi"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                @error('form.status_ekonomi')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input wire:model="form.phone" type="text"
-                    class="form-control" id="phone"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                @error('form.phone')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
+
 
     {{-- Tambahan field --}}
     <div class="row">
@@ -115,15 +92,7 @@ use App\Enums\State;
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="alamat">Alamat</label>
-        <textarea wire:model="form.alamat"
-            class="form-control" id="alamat" rows="2"
-            @if ($currentState === \App\Enums\State::SHOW) disabled @endif></textarea>
-        @error('form.alamat')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-    </div>
+
 
 </form>
                             </div>

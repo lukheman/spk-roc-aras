@@ -13,10 +13,7 @@ class SiswaForm extends Form
 
     public string $nisn = '';
     public string $nama = '';
-    public string $status_ekonomi = '';
-    public string $phone = '';
     public string $jenis_kelamin = '';
-    public string $alamat = '';
     public string $tanggal_lahir = '';
 
     public function rules(): array {
@@ -26,10 +23,7 @@ class SiswaForm extends Form
                 Rule::unique('siswa', 'nisn')->ignore($this->siswa),
             ],
             'nama' => 'required',
-            'status_ekonomi' => 'required',
-            'phone' => 'required|numeric',
             'jenis_kelamin' => 'required',
-            'alamat' => 'required|min:3',
             'tanggal_lahir' => [
                 'required',
             ],
@@ -45,15 +39,7 @@ class SiswaForm extends Form
 
             'nama.required' => 'Nama siswa wajib diisi.',
 
-            'status_ekonomi.required' => 'Status ekonomi wajib dipilih.',
-
-            'phone.required' => 'Nomor HP wajib diisi.',
-            'phone.numeric' => 'Nomor HP hanya boleh berisi angka.',
-
             'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
-
-            'alamat.required' => 'Alamat wajib diisi.',
-            'alamat.min' => 'Alamat minimal harus terdiri dari :min karakter.',
 
             'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
         ];
@@ -66,10 +52,7 @@ class SiswaForm extends Form
         $siswa = Siswa::query()->create([
             'nisn' => $this->nisn,
             'nama' => $this->nama,
-            'status_ekonomi' => $this->status_ekonomi,
-            'phone' => $this->phone,
             'jenis_kelamin' => $this->jenis_kelamin,
-            'alamat' => $this->alamat,
             'tanggal_lahir' => $this->tanggal_lahir
         ]);
 
@@ -95,10 +78,7 @@ class SiswaForm extends Form
 
         $this->nisn = $siswa->nisn;
         $this->nama = $siswa->nama;
-        $this->status_ekonomi = $siswa->status_ekonomi ?? '';
-        $this->phone = $siswa->phone;
         $this->jenis_kelamin = $siswa->jenis_kelamin;
-        $this->alamat = $siswa->alamat;
         $this->tanggal_lahir = $siswa->tanggal_lahir;
     }
 
