@@ -81,11 +81,36 @@ use App\Enums\State;
         </div>
         <div class="col-6">
             <div class="form-group">
+                <label for="tempat_lahir">Tempat Lahir</label>
+                <input wire:model="form.tempat_lahir" type="text"
+                    class="form-control" id="tempat_lahir"
+                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                @error('form.tempat_lahir')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
                 <label for="tanggal_lahir">Tanggal Lahir</label>
                 <input wire:model="form.tanggal_lahir" type="date"
                     class="form-control" id="tanggal_lahir"
                     @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
                 @error('form.tanggal_lahir')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="kelas">Kelas</label>
+                <input wire:model="form.kelas" type="text"
+                    class="form-control" id="kelas"
+                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                @error('form.kelas')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

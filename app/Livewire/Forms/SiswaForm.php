@@ -14,7 +14,9 @@ class SiswaForm extends Form
     public string $nisn = '';
     public string $nama = '';
     public string $jenis_kelamin = '';
+    public string $tempat_lahir = '';
     public string $tanggal_lahir = '';
+    public string $kelas = '';
 
     public function rules(): array {
         return [
@@ -24,9 +26,11 @@ class SiswaForm extends Form
             ],
             'nama' => 'required',
             'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
             'tanggal_lahir' => [
                 'required',
             ],
+            'kelas' => 'required',
 
         ];
     }
@@ -40,8 +44,9 @@ class SiswaForm extends Form
             'nama.required' => 'Nama siswa wajib diisi.',
 
             'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
-
+            'tempat_lahir.required' => 'Tempat lahir wajib diisi.',
             'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
+            'kelas.required' => 'Kelas wajib diisi.',
         ];
     }
 
@@ -53,7 +58,9 @@ class SiswaForm extends Form
             'nisn' => $this->nisn,
             'nama' => $this->nama,
             'jenis_kelamin' => $this->jenis_kelamin,
-            'tanggal_lahir' => $this->tanggal_lahir
+            'tempat_lahir' => $this->tempat_lahir,
+            'tanggal_lahir' => $this->tanggal_lahir,
+            'kelas' => $this->kelas
         ]);
 
         $siswa->alternatif()->create([
@@ -79,7 +86,9 @@ class SiswaForm extends Form
         $this->nisn = $siswa->nisn;
         $this->nama = $siswa->nama;
         $this->jenis_kelamin = $siswa->jenis_kelamin;
+        $this->tempat_lahir = $siswa->tempat_lahir;
         $this->tanggal_lahir = $siswa->tanggal_lahir;
+        $this->kelas = $siswa->kelas;
     }
 
 }

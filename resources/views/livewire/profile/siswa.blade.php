@@ -38,8 +38,18 @@
 
 
                     <div class="form-group mb-2">
+                        <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                        <input type="text" id="tempat_lahir" class="form-control" value="{{ $user->tempat_lahir }}" readonly>
+                    </div>
+
+                    <div class="form-group mb-2">
                         <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                         <input type="date" id="tanggal_lahir" class="form-control" value="{{ $user->tanggal_lahir }}" readonly>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="kelas" class="form-label">Kelas</label>
+                        <input type="text" id="kelas" class="form-control" value="{{ $user->kelas }}" readonly>
                     </div>
                 </form>
             </div>

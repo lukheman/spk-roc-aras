@@ -20,8 +20,14 @@ class Register extends Component
     #[Validate('required|in:L,P')]
     public $jenis_kelamin;
 
+    #[Validate('required|string|max:100')]
+    public $tempat_lahir;
+
     #[Validate('required|date|before:today')]
     public $tanggal_lahir;
+
+    #[Validate('required|string|max:50')]
+    public $kelas;
 
     #[Validate('required|string|min:6|confirmed')]
     public $password;
@@ -33,10 +39,12 @@ class Register extends Component
         $this->validate();
 
         $siswa = Siswa::create([
-            'nisn'           => $this->nisn,
+            'nisn'          => $this->nisn,
             'nama'          => $this->nama,
             'jenis_kelamin' => $this->jenis_kelamin,
+            'tempat_lahir'  => $this->tempat_lahir,
             'tanggal_lahir' => $this->tanggal_lahir,
+            'kelas'         => $this->kelas,
             'password'      => Hash::make($this->password),
         ]);
 

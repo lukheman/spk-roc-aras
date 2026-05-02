@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('nisn', 50);
             $table->string('nama', 50);
             $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('tempat_lahir', 100)->nullable();
             $table->date('tanggal_lahir');
+            $table->string('kelas', 50)->nullable();
             $table->string('password')->nullable()->default(bcrypt('password123'));
             $table->timestamps();
         });

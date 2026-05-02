@@ -223,6 +223,16 @@
 
 
 
+                <!-- Tempat Lahir -->
+                <div class="mb-3">
+                    <label for="tempat_lahir" class="form-label">
+                        <i class="bi bi-geo-alt-fill me-1"></i> Tempat Lahir
+                    </label>
+                    <input type="text" id="tempat_lahir" wire:model="tempat_lahir" class="form-control"
+                        placeholder="Masukkan tempat lahir" required>
+                    @error('tempat_lahir') <small class="text-warning">{{ $message }}</small> @enderror
+                </div>
+
                 <!-- Tanggal Lahir -->
                 <div class="mb-3">
                     <label for="tanggal_lahir" class="form-label">
@@ -230,6 +240,16 @@
                     </label>
                     <input type="date" id="tanggal_lahir" wire:model="tanggal_lahir" class="form-control" required>
                     @error('tanggal_lahir') <small class="text-warning">{{ $message }}</small> @enderror
+                </div>
+
+                <!-- Kelas -->
+                <div class="mb-3">
+                    <label for="kelas" class="form-label">
+                        <i class="bi bi-building me-1"></i> Kelas
+                    </label>
+                    <input type="text" id="kelas" wire:model="kelas" class="form-control"
+                        placeholder="Masukkan kelas (cth: X IPA 1)" required>
+                    @error('kelas') <small class="text-warning">{{ $message }}</small> @enderror
                 </div>
 
                 <!-- Password -->
