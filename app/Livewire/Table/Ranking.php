@@ -25,7 +25,7 @@ class Ranking extends Component
         $this->siswaList = $spkAras->ranking();
         $this->siswaList = $this->siswaList->sortByDesc('skor')->values();
 
-        $siswaLolos = $this->siswaList->take(3);
+        $siswaLolos = $this->siswaList->take(30);
 
         foreach ($this->siswaList as $siswa) {
             if ($siswaLolos->contains('id_siswa', $siswa->id_siswa)) {
