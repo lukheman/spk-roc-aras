@@ -14,11 +14,11 @@ class SpkAras
 
     // Urutan kriteria: C1=absensi, C2=nilai_akademik, C3=keaktifan_ekstrakurikuler, C4=point_pelanggaran, C5=prestasi_sertifikat
     public $criteriaColumns = [
-        'absensi',                    // C1 - Kehadiran (%) - benefit
         'nilai_akademik',             // C2 - Nilai Rapor - benefit
-        'keaktifan_ekstrakurikuler',  // C3 - Skor Ekskul - benefit
-        'point_pelanggaran',          // C4 - Poin Pelanggaran - cost
         'prestasi_sertifikat',        // C5 - Skor Prestasi - benefit
+        'keaktifan_ekstrakurikuler',  // C3 - Skor Ekskul - benefit
+        'absensi',                    // C1 - Kehadiran (%) - benefit
+        'point_pelanggaran',          // C4 - Poin Pelanggaran - cost
     ];
 
     public function __construct()
