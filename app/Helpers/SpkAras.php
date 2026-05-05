@@ -30,8 +30,8 @@ class SpkAras
             'benefit', // C1 - absensi
             'benefit', // C2 - nilai_akademik
             'benefit', // C3 - keaktifan_ekstrakurikuler
-            'cost',    // C4 - point_pelanggaran
             'benefit', // C5 - prestasi_sertifikat
+            'cost',    // C4 - point_pelanggaran
         ];
 
         // Hitung bobot menggunakan metode ROC (Rank Order Centroid)
