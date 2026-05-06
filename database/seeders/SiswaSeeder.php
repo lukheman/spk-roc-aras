@@ -24,22 +24,22 @@ class SiswaSeeder extends Seeder
             ['nama' => 'Siswa E', 'absensi' => 96, 'nilai_akademik' => 90, 'keaktifan_ekstrakurikuler' => 3, 'point_pelanggaran' => 5, 'prestasi_sertifikat' => 3],
         ];
 
-        foreach ($data as $d) {
-            $siswa = ModelSiswa::create([
-                'nisn' => fake()->unique()->numerify('3201####'),
-                'nama' => $d['nama'],
-                'jenis_kelamin' => 'P',
-                'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
-            ]);
-
-            ModelAlternatif::create([
-                'id_siswa' => $siswa->id_siswa,
-                'nilai_akademik' => $d['nilai_akademik'],
-                'prestasi_sertifikat' => $d['prestasi_sertifikat'],
-                'keaktifan_ekstrakurikuler' => $d['keaktifan_ekstrakurikuler'],
-                'absensi' => $d['absensi'],
-                'point_pelanggaran' => $d['point_pelanggaran'],
-            ]);
-        }
-    }
+    //     foreach ($data as $d) {
+    //         $siswa = ModelSiswa::create([
+    //             'nisn' => fake()->unique()->numerify('3201####'),
+    //             'nama' => $d['nama'],
+    //             'jenis_kelamin' => 'P',
+    //             'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
+    //         ]);
+    //
+    //         ModelAlternatif::create([
+    //             'id_siswa' => $siswa->id_siswa,
+    //             'nilai_akademik' => $d['nilai_akademik'],
+    //             'prestasi_sertifikat' => $d['prestasi_sertifikat'],
+    //             'keaktifan_ekstrakurikuler' => $d['keaktifan_ekstrakurikuler'],
+    //             'absensi' => $d['absensi'],
+    //             'point_pelanggaran' => $d['point_pelanggaran'],
+    //         ]);
+    //     }
+    // }
 }
