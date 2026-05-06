@@ -10,7 +10,7 @@
             <div class="col-6">
                 @if ($laporan)
 
-                    <a href="{{ route('laporan-hasil-seleksi')}}" wire:click="add" class="btn btn-danger me-3">
+                    <a href="{{ route('laporan-hasil-seleksi')}}" class="btn btn-danger me-3">
 
                         <i class="bi bi-printer"></i>
                         Download Laporan</a>

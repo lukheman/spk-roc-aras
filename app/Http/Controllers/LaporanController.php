@@ -13,18 +13,20 @@ class LaporanController extends Controller
     {
 
         $spkAras = new SpkAras();
-        $siswaLolos = $spkAras->ranking();
-        $siswaLolos = $siswaLolos->sortByDesc('skor')->values()->take(3);
+        $siswaList = $spkAras->ranking();
+        $siswaList = $siswaList->sortByDesc('skor')->values();
 
-        // return view('laporan.laporan-hasil-seleksi', [
-        //     'siswaLolos' => $siswaLolos,
-        // ]);
+        $siswaLolos = $siswaList->take(30);
+
+        foreach ($siswaList as $siswa) {
+            $siswa->lolos = $siswaLolos->contains('id_siswa', $siswa->id_siswa);
+        }
 
         $pdf = Pdf::loadView('laporan.laporan-hasil-seleksi', [
-            'siswaLolos' => $siswaLolos,
+            'siswaList' => $siswaList,
         ]);
 
-        return $pdf->download('laporan_hasil_seleksi' . date('d_m_Y') . '.pdf');
+        return $pdf->download('laporan_hasil_seleksi_' . date('d_m_Y') . '.pdf');
 
     }
 }

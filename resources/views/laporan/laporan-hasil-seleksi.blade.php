@@ -122,8 +122,8 @@
 
         <p class="section-title">Penerima Beasiswa Berprestasi</p>
 
-        @if ($siswaLolos->isEmpty())
-            <p class="no-data">Tidak ada data penerima beasiswa berprestasi yang tersedia.</p>
+        @if ($siswaList->isEmpty())
+            <p class="no-data">Tidak ada data siswa yang tersedia.</p>
         @else
             <table class="data-table">
                 <thead>
@@ -136,14 +136,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($siswaLolos as $index => $siswa)
+                    @foreach ($siswaList as $index => $siswa)
                         <tr>
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $siswa->nama }}</td>
                             <td>{{ $siswa->nisn }}</td>
                             <td>{{ number_format($siswa->skor, 2) }}</td>
                             <td class="text-center">
-            DITERIMA
+                                {{ $siswa->lolos ? 'DITERIMA' : 'TIDAK DITERIMA' }}
                             </td>
                         </tr>
                     @endforeach
