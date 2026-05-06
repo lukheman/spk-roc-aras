@@ -49,7 +49,7 @@
                         <p class="font-bold ms-3 mb-0">
                         @if (auth('pengguna')->check())
                             {{ auth()->user()->role}} - {{ auth()->user()->name }}
-
+                        @endif
                         </p>
                             </div>
                             <hr>
