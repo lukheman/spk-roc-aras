@@ -22,7 +22,7 @@ class Login extends Component
     public function messages(): array
     {
         return [
-            'identifier.required' => 'Email atau NIM harus diisi.',
+            'identifier.required' => 'Email harus diisi.',
             'password.required'   => 'Password harus diisi.',
         ];
     }
@@ -52,17 +52,6 @@ class Login extends Component
             };
         }
 
-        // Coba login sebagai siswa (nim + password, guard siswa)
-        if (Auth::guard('siswa')->attempt([
-            'nisn' => $this->identifier, // atau nim kalau field di tabel namanya nim
-            'password' => $this->password,
-        ])) {
-            $siswa = Auth::guard('siswa')->user();
-            $redirectUrl = route('hasil-seleksi');
-
-            flash('Login berhasil sebagai siswa');
-            return redirect()->to($redirectUrl);
-        }
 
         return flash('Identitas atau password salah.', 'danger');
     }

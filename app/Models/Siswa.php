@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Authenticatable
+class Siswa extends Model
 {
     /** @use HasFactory<\Database\Factories\SiswaFactory> */
     use HasFactory;
@@ -15,9 +15,7 @@ class Siswa extends Authenticatable
     protected $guarded = [];
     protected $primaryKey = 'id_siswa';
 
-    protected $hidden = [
-        'password',
-    ];
+
 
     public function alternatif(): HasOne {
 

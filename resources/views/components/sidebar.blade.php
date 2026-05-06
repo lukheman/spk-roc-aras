@@ -50,9 +50,6 @@
                         @if (auth('pengguna')->check())
                             {{ auth()->user()->role}} - {{ auth()->user()->name }}
 
-                        @elseif(auth('siswa')->check())
-                            Siswa - {{ auth()->user()->nama }}
-                        @endif
                         </p>
                             </div>
                             <hr>
@@ -128,17 +125,7 @@
                         @endif
 
 
-                        @if (auth('siswa')->check())
 
-<x-nav-link
-    icon="bi-exclamation-triangle-fill"
-    href="{{ route('hasil-seleksi') }}"
-    :active="request()->routeIs('hasil-seleksi')"
->
-                        Hasil Seleksi
-</x-nav-link>
-
-                        @endif
 
 
 

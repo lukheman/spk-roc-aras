@@ -12,13 +12,13 @@ Route::get('/', Livewire\Landing::class)->name('landing');
 
 // Authentication
 Route::get('/login', Livewire\Login::class)->name('login')->middleware('guest');
-Route::get('/register', Livewire\Register::class)->name('register')->middleware('guest');
+
 Route::get('/logout', Controllers\LogoutController::class)->name('logout');
 
 // =======================
 // Authenticated Routes
 // =======================
-Route::middleware(MultiAuth::class . ':siswa,pengguna')->group(function () {
+Route::middleware(MultiAuth::class . ':pengguna')->group(function () {
     Route::get('/profile', Livewire\Profile\Index::class)->name('profile');
     Route::get('/dashboard', Livewire\Dashboard::class)->name('dashboard');
 
@@ -28,7 +28,6 @@ Route::middleware(MultiAuth::class . ':siswa,pengguna')->group(function () {
     Route::get('/ranking', Livewire\Table\Ranking::class)->name('ranking');
     Route::get('/alternatif', Livewire\Table\AlternatifTable::class)->name('alternatif');
 
-    Route::get('/hasil-seleksi', Livewire\HasilSeleksi::class)->name('hasil-seleksi');
 
     Route::get('/laporan-hasil-seleksi',Livewire\Laporan\LaporanHasilSeleksi::class)->name('laporan-hasil-seleksi-page'); // Laporan
 
