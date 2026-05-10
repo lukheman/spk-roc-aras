@@ -106,7 +106,7 @@
     href="{{ route('alternatif') }}"
     :active="request()->routeIs('alternatif')"
 >
-    Alternatif
+    Kriteria
 </x-nav-link>
                         @elseif(auth('pengguna')->user()->role === \App\Enums\Role::KEPALASEKOLAH)
 
