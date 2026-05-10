@@ -151,7 +151,7 @@ use App\Enums\State;
 
                             <td class="text-end">
 
-                                <button wire:click="alternatif({{ $item->id_siswa }})" class="btn btn-sm btn-info"><i class="bi bi-list-columns me-1"></i>Alternatif</button>
+                                <button wire:click="alternatif({{ $item->id_siswa }})" class="btn btn-sm btn-info"><i class="bi bi-list-columns me-1"></i>Kriteria</button>
 
                             </td>
                         </tr>
