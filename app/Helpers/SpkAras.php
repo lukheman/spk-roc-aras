@@ -29,6 +29,11 @@ class SpkAras
         $this->hitungBobotROC();
     }
 
+    public $matrixDecision = [];
+    public $optimalValues = [];
+    public $matrixNormalized = [];
+    public $matrixWeighted = [];
+
     public function ranking()
     {
         if ($this->criteriaList->isEmpty() || $this->siswaList->isEmpty()) {
@@ -36,17 +41,17 @@ class SpkAras
         }
 
         // Langkah 1: Bentuk matriks keputusan & tentukan nilai optimal (A0)
-        $matrix = $this->bentukMatriks();
-        $optimal = $this->tentukanNilaiOptimal($matrix);
+        $this->matrixDecision = $this->bentukMatriks();
+        $this->optimalValues = $this->tentukanNilaiOptimal($this->matrixDecision);
 
         // Langkah 2: Normalisasi matriks
-        $normalizedMatrix = $this->normalisasiMatriks($matrix, $optimal);
+        $this->matrixNormalized = $this->normalisasiMatriks($this->matrixDecision, $this->optimalValues);
 
         // Langkah 3: Hitung matriks normalisasi terbobot
-        $weightedMatrix = $this->hitungMatriksTerbobot($normalizedMatrix);
+        $this->matrixWeighted = $this->hitungMatriksTerbobot($this->matrixNormalized);
 
         // Langkah 4: Hitung nilai fungsi optimalitas (Si)
-        $this->hitungNilaiOptimalitas($weightedMatrix);
+        $this->hitungNilaiOptimalitas($this->matrixWeighted);
 
         // Langkah 5: Hitung derajat utilitas (Ki)
         $this->hitungDerajatUtilitas();
