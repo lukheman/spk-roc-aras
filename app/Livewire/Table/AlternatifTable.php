@@ -4,6 +4,7 @@ namespace App\Livewire\Table;
 
 use App\Enums\State;
 use App\Livewire\Forms\AlternatifForm;
+use App\Models\Kriteria;
 use App\Models\Siswa;
 use App\Traits\WithModal;
 use App\Traits\WithNotify;
@@ -12,7 +13,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Kriteria')]
+#[Title('Nilai Alternatif')]
 class AlternatifTable extends Component
 {
 
@@ -31,13 +32,17 @@ class AlternatifTable extends Component
     #[Computed]
     public function siswa() {
         return Siswa::query()
-            ->with('alternatif')
+            ->with('nilaiAlternatif')
             ->when($this->search, function($query) {
-
                 $query->where('nama', 'like', '%'.$this->search.'%');
             })
             ->latest()
             ->paginate(10);
+    }
+
+    #[Computed]
+    public function kriteriaList() {
+        return Kriteria::with('subKriteria')->orderBy('prioritas')->get();
     }
 
     public function save()
@@ -55,7 +60,7 @@ class AlternatifTable extends Component
 
         $this->currentState = State::CREATE;
 
-        $siswa = Siswa::with('alternatif')->find($id);
+        $siswa = Siswa::with('nilaiAlternatif')->find($id);
 
         $this->form->fillFromModel($siswa);
         $this->openModal($this->idModal);

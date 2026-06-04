@@ -61,7 +61,7 @@
     href="{{ route('dashboard') }}"
     :active="request()->routeIs('dashboard')"
 >
-    Dashbaord
+    Dashboard
 </x-nav-link>
 
                             @endif
@@ -75,7 +75,7 @@
                         {{-- ADMIN --}}
                         @if (auth('pengguna')->user()->role === \App\Enums\Role::ADMIN)
 
-                            <li class="sidebar-title">Navigasi Utama</li>
+                            <li class="sidebar-title">Master Data</li>
 
 <x-nav-link
     icon="bi-people-fill"
@@ -93,12 +93,22 @@
     Daftar Pengguna
 </x-nav-link>
 
+                            <li class="sidebar-title">Kriteria & Penilaian</li>
+
 <x-nav-link
-    icon="bi-bar-chart-fill"
-    href="{{ route('ranking') }}"
-    :active="request()->routeIs('ranking')"
+    icon="bi-gear-fill"
+    href="{{ route('kriteria') }}"
+    :active="request()->routeIs('kriteria')"
 >
-    Ranking
+    Kelola Kriteria
+</x-nav-link>
+
+<x-nav-link
+    icon="bi-list-nested"
+    href="{{ route('sub-kriteria') }}"
+    :active="request()->routeIs('sub-kriteria')"
+>
+    Sub Kriteria
 </x-nav-link>
 
 <x-nav-link
@@ -106,7 +116,17 @@
     href="{{ route('alternatif') }}"
     :active="request()->routeIs('alternatif')"
 >
-    Kriteria
+    Nilai Alternatif
+</x-nav-link>
+
+                            <li class="sidebar-title">Hasil SPK</li>
+
+<x-nav-link
+    icon="bi-bar-chart-fill"
+    href="{{ route('ranking') }}"
+    :active="request()->routeIs('ranking')"
+>
+    Ranking
 </x-nav-link>
                         @elseif(auth('pengguna')->user()->role === \App\Enums\Role::KEPALASEKOLAH)
 

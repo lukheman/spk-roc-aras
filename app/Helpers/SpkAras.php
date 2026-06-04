@@ -1,7 +1,8 @@
 <?php
 namespace App\Helpers;
 
-use App\Models\Alternatif;
+use App\Models\Kriteria;
+use App\Models\NilaiAlternatif;
 use App\Models\Siswa;
 
 class SpkAras
@@ -10,29 +11,19 @@ class SpkAras
     public $siswaList;
     public $weights = [];
     public $criteriaTypes = [];
+    public $criteriaList = [];
     public $s0 = 0;
-
-    // Urutan kriteria: C1=absensi, C2=nilai_akademik, C3=keaktifan_ekstrakurikuler, C4=point_pelanggaran, C5=prestasi_sertifikat
-    public $criteriaColumns = [
-        'nilai_akademik',             // C2 - Nilai Rapor - benefit
-        'prestasi_sertifikat',        // C5 - Skor Prestasi - benefit
-        'keaktifan_ekstrakurikuler',  // C3 - Skor Ekskul - benefit
-        'absensi',                    // C1 - Kehadiran (%) - benefit
-        'point_pelanggaran',          // C4 - Poin Pelanggaran - cost
-    ];
 
     public function __construct()
     {
-        $this->siswaList = Siswa::query()->has('alternatif')->with('alternatif')->get();
+        // Ambil kriteria dari database, diurutkan berdasarkan kode
+        $this->criteriaList = Kriteria::orderBy('prioritas')->get();
 
-        // Tipe kriteria: benefit (lebih tinggi lebih baik) atau cost (lebih rendah lebih baik)
-        $this->criteriaTypes = [
-            'benefit', // C1 - absensi
-            'benefit', // C2 - nilai_akademik
-            'benefit', // C3 - keaktifan_ekstrakurikuler
-            'benefit', // C5 - prestasi_sertifikat
-            'cost',    // C4 - point_pelanggaran
-        ];
+        // Ambil siswa yang memiliki nilai alternatif
+        $this->siswaList = Siswa::query()->has('nilaiAlternatif')->with('nilaiAlternatif')->get();
+
+        // Tipe kriteria dari database
+        $this->criteriaTypes = $this->criteriaList->pluck('tipe')->toArray();
 
         // Hitung bobot menggunakan metode ROC (Rank Order Centroid)
         $this->hitungBobotROC();
@@ -40,6 +31,10 @@ class SpkAras
 
     public function ranking()
     {
+        if ($this->criteriaList->isEmpty() || $this->siswaList->isEmpty()) {
+            return $this->siswaList;
+        }
+
         // Langkah 1: Bentuk matriks keputusan & tentukan nilai optimal (A0)
         $matrix = $this->bentukMatriks();
         $optimal = $this->tentukanNilaiOptimal($matrix);
@@ -60,11 +55,15 @@ class SpkAras
     }
 
     /**
-     * Hitung bobot ROC (Rank Order Centroid) untuk 5 kriteria
+     * Hitung bobot ROC (Rank Order Centroid) untuk n kriteria
      */
     private function hitungBobotROC()
     {
-        $n = count($this->criteriaColumns);
+        $n = count($this->criteriaList);
+
+        if ($n === 0) {
+            return;
+        }
 
         for ($i = 1; $i <= $n; $i++) {
             $sum = 0;
@@ -84,8 +83,12 @@ class SpkAras
 
         foreach ($this->siswaList as $siswa) {
             $row = [];
-            foreach ($this->criteriaColumns as $col) {
-                $row[] = (float) ($siswa->alternatif?->$col ?? 0);
+            foreach ($this->criteriaList as $kriteria) {
+                // Cari nilai alternatif siswa untuk kriteria ini
+                $nilaiAlternatif = $siswa->nilaiAlternatif
+                    ->where('id_kriteria', $kriteria->id_kriteria)
+                    ->first();
+                $row[] = (float) ($nilaiAlternatif?->nilai ?? 0);
             }
             $matrix[] = $row;
         }
@@ -100,7 +103,7 @@ class SpkAras
     private function tentukanNilaiOptimal(array $matrix): array
     {
         $optimal = [];
-        $criteriaCount = count($this->criteriaColumns);
+        $criteriaCount = count($this->criteriaList);
 
         for ($j = 0; $j < $criteriaCount; $j++) {
             $colValues = array_column($matrix, $j);
@@ -122,7 +125,7 @@ class SpkAras
      */
     private function normalisasiMatriks(array $matrix, array $optimal): array
     {
-        $criteriaCount = count($this->criteriaColumns);
+        $criteriaCount = count($this->criteriaList);
 
         // Gabungkan A0 dengan alternatif lainnya
         $allRows = array_merge([$optimal], $matrix);
@@ -142,7 +145,6 @@ class SpkAras
                 // Cost: gunakan 1/x_ij
                 $sum = 0;
                 foreach ($allRows as $row) {
-                    // $val = $row[$j] > 0 ? 1 / $row[$j] : 0;
                     $val = $row[$j] > 0 ? 1 / $row[$j] : 1 / 1;
                     $sum += $val;
                 }
@@ -189,8 +191,8 @@ class SpkAras
             $siswa->si = round(array_sum($row), 3);
 
             // Simpan detail per kriteria untuk tampilan
-            foreach ($this->criteriaColumns as $j => $col) {
-                $siswa->{"weighted_$col"} = $weightedMatrix[$idx + 1][$j];
+            foreach ($this->criteriaList as $j => $kriteria) {
+                $siswa->{"weighted_{$kriteria->kode}"} = $weightedMatrix[$idx + 1][$j];
             }
         }
     }
@@ -219,5 +221,13 @@ class SpkAras
     public function getS0(): float
     {
         return $this->s0 ?? 0;
+    }
+
+    /**
+     * Get daftar kriteria
+     */
+    public function getCriteriaList()
+    {
+        return $this->criteriaList;
     }
 }

@@ -27,6 +27,8 @@ Route::middleware(MultiAuth::class . ':pengguna')->group(function () {
     Route::get('/siswa', Livewire\Table\SiswaTable::class)->name('siswa-table');
     Route::get('/ranking', Livewire\Table\Ranking::class)->name('ranking');
     Route::get('/alternatif', Livewire\Table\AlternatifTable::class)->name('alternatif');
+    Route::get('/kriteria', Livewire\Table\KriteriaTable::class)->name('kriteria');
+    Route::get('/sub-kriteria', Livewire\Table\SubKriteriaTable::class)->name('sub-kriteria');
 
 
     Route::get('/laporan-hasil-seleksi',Livewire\Laporan\LaporanHasilSeleksi::class)->name('laporan-hasil-seleksi-page'); // Laporan

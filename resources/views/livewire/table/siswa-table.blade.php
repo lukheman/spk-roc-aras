@@ -156,11 +156,9 @@ use App\Enums\State;
                             <td>{{ $item->nama }}</td>
                             <td class="text-end">
 
-                                <button wire:click="detail({{ $item->id_siswa }})" class="btn btn-sm btn-info"><i class="bi bi-eye me-1"></i>Lihat</button>
-                                    <button wire:click="edit({{ $item->id_siswa }})"
-                                        class="btn btn-sm btn-warning" type="button"><i class="bi bi-pencil-square me-1"></i>Edit</button>
-                                    <button wire:click="delete({{ $item->id_siswa }})"
-                                        class="btn btn-sm btn-danger" type="button"><i class="bi bi-trash me-1"></i>Hapus</button>
+                                <button wire:click="detail({{ $item->id_siswa }})" class="btn btn-info"><i class="bi bi-eye me-1"></i>Lihat</button>
+                                    <button wire:click="edit({{ $item->id_siswa }})" class="btn btn-warning" type="button"><i class="bi bi-pencil-square me-1"></i>Edit</button>
+                                    <button wire:click="delete({{ $item->id_siswa }})" class="btn btn-danger" type="button"><i class="bi bi-trash me-1"></i>Hapus</button>
                             </td>
                         </tr>
                     @endforeach

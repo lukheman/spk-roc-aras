@@ -2,66 +2,74 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Alternatif;
+use App\Models\Kriteria;
+use App\Models\NilaiAlternatif;
 use App\Models\Siswa;
-use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class AlternatifForm extends Form
 {
     public ?Siswa $siswa = null;
 
-    public ?int $nilai_akademik = null;
-    public ?int $prestasi_sertifikat = null;
-    public ?int $keaktifan_ekstrakurikuler = null;
-    public ?int $absensi = null;
-    public ?int $point_pelanggaran = null;
+    // Dynamic array of criteria values: [id_kriteria => nilai]
+    public array $nilai = [];
 
     public function rules(): array
     {
-        return [
-            'nilai_akademik' => 'nullable|integer',
-            'prestasi_sertifikat' => 'nullable|integer',
-            'keaktifan_ekstrakurikuler' => 'nullable|integer',
-            'absensi' => 'nullable|integer',
-            'point_pelanggaran' => 'nullable|integer',
-        ];
+        $rules = [];
+        foreach ($this->nilai as $id => $val) {
+            $rules["nilai.{$id}"] = 'nullable|integer';
+        }
+        return $rules;
     }
 
     public function messages(): array
     {
-        return [
-            'nilai_akademik.integer' => 'Nilai akademik harus berupa angka.',
-            'prestasi_sertifikat.integer' => 'Nilai prestasi/sertifikat harus berupa angka.',
-            'keaktifan_ekstrakurikuler.integer' => 'Nilai keaktifan ekstrakurikuler harus berupa angka.',
-            'absensi.integer' => 'Nilai absensi harus berupa angka.',
-            'point_pelanggaran.integer' => 'Nilai point pelanggaran harus berupa angka.',
-        ];
+        $messages = [];
+        $kriteriaList = Kriteria::all()->keyBy('id_kriteria');
+        foreach ($this->nilai as $id => $val) {
+            $nama = $kriteriaList[$id]->nama ?? "Kriteria {$id}";
+            $messages["nilai.{$id}.integer"] = "Nilai {$nama} harus berupa angka.";
+        }
+        return $messages;
     }
 
     public function store(): void
     {
-        $this->siswa->alternatif()->create($this->validate());
+        $this->validate();
+
+        foreach ($this->nilai as $idKriteria => $nilaiValue) {
+            NilaiAlternatif::updateOrCreate(
+                [
+                    'id_siswa' => $this->siswa->id_siswa,
+                    'id_kriteria' => $idKriteria,
+                ],
+                [
+                    'nilai' => $nilaiValue ?? 0,
+                ]
+            );
+        }
         $this->reset();
     }
 
     public function update(): void
     {
-        $this->siswa->alternatif()->updateOrCreate(
-            ['id_siswa' => $this->siswa->id_siswa],
-            $this->validate()
-        );
-        $this->reset();
+        $this->store(); // Same logic: upsert all values
     }
 
     public function fillFromModel(Siswa $siswa): void
     {
         $this->siswa = $siswa;
 
-        $this->nilai_akademik = $siswa->alternatif?->nilai_akademik;
-        $this->prestasi_sertifikat = $siswa->alternatif?->prestasi_sertifikat;
-        $this->keaktifan_ekstrakurikuler = $siswa->alternatif?->keaktifan_ekstrakurikuler;
-        $this->absensi = $siswa->alternatif?->absensi;
-        $this->point_pelanggaran = $siswa->alternatif?->point_pelanggaran;
+        // Load all kriteria and fill values from existing data
+        $kriteriaList = Kriteria::orderBy('kode')->get();
+        $existingValues = $siswa->nilaiAlternatif->keyBy('id_kriteria');
+
+        $this->nilai = [];
+        foreach ($kriteriaList as $kriteria) {
+            $this->nilai[$kriteria->id_kriteria] = $existingValues->has($kriteria->id_kriteria)
+                ? $existingValues[$kriteria->id_kriteria]->nilai
+                : null;
+        }
     }
 }

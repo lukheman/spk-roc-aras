@@ -18,84 +18,35 @@ use App\Enums\State;
                                 </h5>
                             </div>
                             <div class="modal-body">
-<!-- FIX: modal tidak bisa tertutup -->
 <form>
     <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="nilai_akademik">Nilai Akademik (Rata-rata Rapor)</label>
-                <input wire:model="form.nilai_akademik" type="number"
-                    class="form-control" id="nilai_akademik"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                @error('form.nilai_akademik')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
+        @foreach ($this->kriteriaList as $kriteria)
+            <div class="col-6 mb-3">
+                <div class="form-group">
+                    <label for="kriteria_{{ $kriteria->id_kriteria }}">
+                        {{ $kriteria->kode }} - {{ $kriteria->nama }}
+                        <span class="badge bg-{{ $kriteria->tipe === 'benefit' ? 'success' : 'warning' }} ms-1" style="font-size: 0.7em;">
+                            {{ ucfirst($kriteria->tipe) }}
+                        </span>
+                    </label>
+                    @if($kriteria->subKriteria->count() > 0)
+                        <select wire:model="form.nilai.{{ $kriteria->id_kriteria }}" class="form-control" id="kriteria_{{ $kriteria->id_kriteria }}" @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                            <option value="">-- Pilih --</option>
+                            @foreach($kriteria->subKriteria as $sub)
+                                <option value="{{ $sub->nilai }}">{{ $sub->nama }} (Nilai: {{ $sub->nilai }})</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <input wire:model="form.nilai.{{ $kriteria->id_kriteria }}" type="number"
+                            class="form-control" id="kriteria_{{ $kriteria->id_kriteria }}"
+                            @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
+                    @endif
+                    @error("form.nilai.{$kriteria->id_kriteria}")
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
             </div>
-        </div>
-
-        <div class="col-6">
-            <div class="form-group">
-                <label for="prestasi_sertifikat">Prestasi / Sertifikat</label>
-                <select wire:model="form.prestasi_sertifikat"
-                    class="form-control" id="prestasi_sertifikat"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                    <option value="">-- Pilih --</option>
-                    <option value="1">1 - Tidak Ada</option>
-                    <option value="2">2 - Tingkat Sekolah</option>
-                    <option value="3">3 - Tingkat Kab/Kota</option>
-                    <option value="4">4 - Tingkat Prov/Nasional</option>
-                </select>
-                @error('form.prestasi_sertifikat')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-2">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="keaktifan_ekstrakurikuler">Keaktifan Ekstrakurikuler</label>
-                <select wire:model="form.keaktifan_ekstrakurikuler"
-                    class="form-control" id="keaktifan_ekstrakurikuler"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                    <option value="">-- Pilih --</option>
-                    <option value="1">1 - Kurang</option>
-                    <option value="2">2 - Cukup</option>
-                    <option value="3">3 - Baik</option>
-                    <option value="4">4 - Sangat Baik</option>
-                </select>
-                @error('form.keaktifan_ekstrakurikuler')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="form-group">
-                <label for="absensi">Absensi (Kehadiran Siswa)</label>
-                <input wire:model="form.absensi" type="number"
-                    class="form-control" id="absensi"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                @error('form.absensi')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-2">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="point_pelanggaran">Point Pelanggaran</label>
-                <input wire:model="form.point_pelanggaran" type="number"
-                    class="form-control" id="point_pelanggaran"
-                    @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
-                @error('form.point_pelanggaran')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
+        @endforeach
     </div>
 </form>
                             </div>
@@ -134,14 +85,14 @@ use App\Enums\State;
                 </thead>
                 <tbody>
                     @foreach ($this->siswa as $item)
-                        <tr wire:key="{{ $item->id }}">
+                        <tr wire:key="{{ $item->id_siswa }}">
                             <td scope="row">{{ $loop->index + $this->siswa->firstItem() }}</td>
                             <td>{{ $item->nisn }}</td>
                             <td>{{ $item->nama }}</td>
 
                             <td class="text-end">
 
-                                <button wire:click="alternatif({{ $item->id_siswa }})" class="btn btn-sm btn-info"><i class="bi bi-list-columns me-1"></i>Kriteria</button>
+                                <button wire:click="alternatif({{ $item->id_siswa }})" class="btn btn-info"><i class="bi bi-list-columns me-1"></i>Kriteria</button>
 
                             </td>
                         </tr>

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
@@ -15,12 +15,8 @@ class Siswa extends Model
     protected $guarded = [];
     protected $primaryKey = 'id_siswa';
 
-
-
-    public function alternatif(): HasOne {
-
-        return $this->hasOne(Alternatif::class, 'id_siswa', 'id_siswa');
-
+    public function nilaiAlternatif(): HasMany
+    {
+        return $this->hasMany(NilaiAlternatif::class, 'id_siswa', 'id_siswa');
     }
-
 }

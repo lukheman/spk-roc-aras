@@ -63,9 +63,6 @@ class SiswaForm extends Form
             'kelas' => $this->kelas
         ]);
 
-        $siswa->alternatif()->create([
-            'id_siswa' => $siswa->id_siswa
-        ]);
 
         $this->reset();
     }

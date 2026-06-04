@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Siswa as ModelSiswa;
-use App\Models\Alternatif as ModelAlternatif;
+use App\Models\Kriteria;
+use App\Models\NilaiAlternatif;
 
 class SiswaSeeder extends Seeder
 {
@@ -17,13 +18,15 @@ class SiswaSeeder extends Seeder
         // Data dari Tabel 2.3 Data Alternatif Calon Penerima Beasiswa
         // C1=Kehadiran(%), C2=Nilai Rapor, C3=Skor Ekskul, C4=Poin Pelanggaran, C5=Skor Prestasi
         $data = [
-            ['nama' => 'Siswa A', 'absensi' => 98, 'nilai_akademik' => 88, 'keaktifan_ekstrakurikuler' => 3, 'point_pelanggaran' => 5, 'prestasi_sertifikat' => 2],
-            ['nama' => 'Siswa B', 'absensi' => 100, 'nilai_akademik' => 93, 'keaktifan_ekstrakurikuler' => 4, 'point_pelanggaran' => 0, 'prestasi_sertifikat' => 4],
-            ['nama' => 'Siswa C', 'absensi' => 90, 'nilai_akademik' => 85, 'keaktifan_ekstrakurikuler' => 2, 'point_pelanggaran' => 20, 'prestasi_sertifikat' => 1],
-            ['nama' => 'Siswa D', 'absensi' => 95, 'nilai_akademik' => 82, 'keaktifan_ekstrakurikuler' => 2, 'point_pelanggaran' => 10, 'prestasi_sertifikat' => 1],
-            ['nama' => 'Siswa E', 'absensi' => 96, 'nilai_akademik' => 90, 'keaktifan_ekstrakurikuler' => 3, 'point_pelanggaran' => 5, 'prestasi_sertifikat' => 3],
+            ['nama' => 'Siswa A', 'C1' => 98, 'C2' => 88, 'C3' => 3, 'C4' => 5, 'C5' => 2],
+            ['nama' => 'Siswa B', 'C1' => 100, 'C2' => 93, 'C3' => 4, 'C4' => 0, 'C5' => 4],
+            ['nama' => 'Siswa C', 'C1' => 90, 'C2' => 85, 'C3' => 2, 'C4' => 20, 'C5' => 1],
+            ['nama' => 'Siswa D', 'C1' => 95, 'C2' => 82, 'C3' => 2, 'C4' => 10, 'C5' => 1],
+            ['nama' => 'Siswa E', 'C1' => 96, 'C2' => 90, 'C3' => 3, 'C4' => 5, 'C5' => 3],
         ];
 
+    //     $kriteriaList = Kriteria::all()->keyBy('kode');
+    //
     //     foreach ($data as $d) {
     //         $siswa = ModelSiswa::create([
     //             'nisn' => fake()->unique()->numerify('3201####'),
@@ -32,14 +35,13 @@ class SiswaSeeder extends Seeder
     //             'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
     //         ]);
     //
-    //         ModelAlternatif::create([
-    //             'id_siswa' => $siswa->id_siswa,
-    //             'nilai_akademik' => $d['nilai_akademik'],
-    //             'prestasi_sertifikat' => $d['prestasi_sertifikat'],
-    //             'keaktifan_ekstrakurikuler' => $d['keaktifan_ekstrakurikuler'],
-    //             'absensi' => $d['absensi'],
-    //             'point_pelanggaran' => $d['point_pelanggaran'],
-    //         ]);
+    //         foreach ($kriteriaList as $kode => $kriteria) {
+    //             NilaiAlternatif::create([
+    //                 'id_siswa' => $siswa->id_siswa,
+    //                 'id_kriteria' => $kriteria->id_kriteria,
+    //                 'nilai' => $d[$kode] ?? 0,
+    //             ]);
+    //         }
     //     }
-    // }
+    }
 }

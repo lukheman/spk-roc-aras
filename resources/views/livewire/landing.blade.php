@@ -45,7 +45,7 @@
           <div class="card-label">Perankingan</div>
         </div>
         <div class="method-card">
-          <div class="card-value">5</div>
+          <div class="card-value">{{ $jumlahKriteria }}</div>
           <div class="card-label">Kriteria</div>
         </div>
       </div>
@@ -101,7 +101,7 @@
             </div>
             <h4>Seleksi Terukur</h4>
             <p>
-              5 kriteria penilaian: kehadiran, nilai rapor, keaktifan ekskul, poin pelanggaran, dan prestasi.
+              {{ $jumlahKriteria }} kriteria penilaian yang dapat dikelola secara dinamis melalui sistem.
             </p>
           </div>
         </div>
