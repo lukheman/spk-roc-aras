@@ -124,6 +124,7 @@
         <h5 class="card-title mb-0 text-white">Langkah 1: Matriks Keputusan & Nilai Optimal / Ideal (A0)</h5>
     </div>
     <div class="card-body mt-3">
+        @if(!empty($spkData['matrixDecision']))
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-light">
@@ -152,6 +153,9 @@
                 </tbody>
             </table>
         </div>
+        @else
+            <div class="alert alert-warning">Data penilaian alternatif belum lengkap.</div>
+        @endif
     </div>
 </div>
 
@@ -160,6 +164,7 @@
         <h5 class="card-title mb-0 text-white">Langkah 2: Normalisasi Matriks</h5>
     </div>
     <div class="card-body mt-3">
+        @if(!empty($spkData['matrixDecision']))
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-light">
@@ -188,6 +193,9 @@
                 </tbody>
             </table>
         </div>
+        @else
+            <div class="alert alert-warning">Data penilaian alternatif belum lengkap.</div>
+        @endif
     </div>
 </div>
 
@@ -196,6 +204,7 @@
         <h5 class="card-title mb-0 text-white">Langkah 3: Matriks Terbobot</h5>
     </div>
     <div class="card-body mt-3">
+        @if(!empty($spkData['matrixDecision']))
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-light">
@@ -224,6 +233,9 @@
                 </tbody>
             </table>
         </div>
+        @else
+            <div class="alert alert-warning">Data penilaian alternatif belum lengkap.</div>
+        @endif
     </div>
 </div>
 
@@ -232,6 +244,7 @@
         <h5 class="card-title mb-0 text-white">Langkah 4: Nilai Fungsi Optimalitas (Si) dan Derajat Utilitas (Ki)</h5>
     </div>
     <div class="card-body mt-3">
+        @if(!empty($spkData['matrixDecision']))
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-light">
@@ -257,6 +270,9 @@
                 </tbody>
             </table>
         </div>
+        @else
+            <div class="alert alert-warning">Data penilaian alternatif belum lengkap.</div>
+        @endif
     </div>
 </div>
 

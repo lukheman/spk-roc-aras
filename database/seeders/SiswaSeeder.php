@@ -25,23 +25,25 @@ class SiswaSeeder extends Seeder
             ['nama' => 'Siswa E', 'C1' => 96, 'C2' => 90, 'C3' => 3, 'C4' => 5, 'C5' => 3],
         ];
 
-    //     $kriteriaList = Kriteria::all()->keyBy('kode');
-    //
-    //     foreach ($data as $d) {
-    //         $siswa = ModelSiswa::create([
-    //             'nisn' => fake()->unique()->numerify('3201####'),
-    //             'nama' => $d['nama'],
-    //             'jenis_kelamin' => 'P',
-    //             'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
-    //         ]);
-    //
-    //         foreach ($kriteriaList as $kode => $kriteria) {
-    //             NilaiAlternatif::create([
-    //                 'id_siswa' => $siswa->id_siswa,
-    //                 'id_kriteria' => $kriteria->id_kriteria,
-    //                 'nilai' => $d[$kode] ?? 0,
-    //             ]);
-    //         }
-    //     }
+        $kriteriaList = Kriteria::all()->keyBy('kode');
+
+        foreach ($data as $d) {
+            $siswa = ModelSiswa::create([
+                'nisn' => fake()->unique()->numerify('3201####'),
+                'nama' => $d['nama'],
+                'jenis_kelamin' => 'P',
+                'tempat_lahir' => fake()->city(),
+                'tanggal_lahir' => fake()->date('Y-m-d', '-15 years'),
+                'kelas' => 'XII',
+            ]);
+
+            foreach ($kriteriaList as $kode => $kriteria) {
+                NilaiAlternatif::create([
+                    'id_siswa' => $siswa->id_siswa,
+                    'id_kriteria' => $kriteria->id_kriteria,
+                    'nilai' => $d[$kode] ?? 0,
+                ]);
+            }
+        }
     }
 }
