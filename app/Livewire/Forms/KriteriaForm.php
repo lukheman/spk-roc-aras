@@ -53,6 +53,12 @@ class KriteriaForm extends Form
         $this->reset();
     }
 
+    public function delete(): void
+    {
+        $this->kriteria->delete();
+        $this->reset();
+    }
+
     public function fillFromModel(Kriteria $kriteria): void
     {
         $this->kriteria = $kriteria;

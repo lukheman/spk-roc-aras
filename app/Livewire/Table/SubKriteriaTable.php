@@ -9,6 +9,7 @@ use App\Models\SubKriteria;
 use App\Traits\WithModal;
 use App\Traits\WithNotify;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -78,11 +79,15 @@ class SubKriteriaTable extends Component
 
     public function delete($id)
     {
-        $subKriteria = SubKriteria::find($id);
-        if ($subKriteria) {
-            $subKriteria->delete();
-            $this->notifySuccess('Sub Kriteria berhasil dihapus!');
-        }
+        $this->form->subKriteria = SubKriteria::find($id);
+        $this->dispatch('deleteConfirmation', message: 'Yakin untuk menghapus data sub kriteria?');
+    }
+
+    #[On('deleteConfirmed')]
+    public function deleteConfirmed()
+    {
+        $this->form->delete();
+        $this->notifySuccess('Sub Kriteria berhasil dihapus!');
     }
 
     public function render()

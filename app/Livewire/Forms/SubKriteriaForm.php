@@ -50,6 +50,12 @@ class SubKriteriaForm extends Form
         $this->reset(['nama', 'nilai', 'subKriteria']);
     }
 
+    public function delete(): void
+    {
+        $this->subKriteria->delete();
+        $this->reset();
+    }
+
     public function fillFromModel(SubKriteria $subKriteria): void
     {
         $this->subKriteria = $subKriteria;

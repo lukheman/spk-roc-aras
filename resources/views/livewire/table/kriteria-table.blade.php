@@ -148,7 +148,7 @@ use App\Enums\State;
 
                             <td class="text-end">
                                 <button wire:click="edit({{ $item->id_kriteria }})" class="btn btn-warning"><i class="bi bi-pencil-square me-1"></i>Edit</button>
-                                <button wire:click="delete({{ $item->id_kriteria }})" wire:confirm="Apakah Anda yakin ingin menghapus kriteria ini?" class="btn btn-danger"><i class="bi bi-trash me-1"></i>Hapus</button>
+                                <button wire:click="delete({{ $item->id_kriteria }})" class="btn btn-danger" type="button"><i class="bi bi-trash me-1"></i>Hapus</button>
                             </td>
                         </tr>
                     @endforeach

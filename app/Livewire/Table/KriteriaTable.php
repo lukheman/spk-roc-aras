@@ -8,6 +8,7 @@ use App\Models\Kriteria;
 use App\Traits\WithModal;
 use App\Traits\WithNotify;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -70,11 +71,15 @@ class KriteriaTable extends Component
 
     public function delete($id)
     {
-        $kriteria = Kriteria::find($id);
-        if ($kriteria) {
-            $kriteria->delete();
-            $this->notifySuccess('Kriteria berhasil dihapus!');
-        }
+        $this->form->kriteria = Kriteria::find($id);
+        $this->dispatch('deleteConfirmation', message: 'Yakin untuk menghapus data kriteria?');
+    }
+
+    #[On('deleteConfirmed')]
+    public function deleteConfirmed()
+    {
+        $this->form->delete();
+        $this->notifySuccess('Kriteria berhasil dihapus!');
     }
 
     public function render()
