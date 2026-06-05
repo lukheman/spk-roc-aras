@@ -6,7 +6,7 @@ use App\Enums\State;
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-4">
+            <div class="col-6">
 
                 <!-- Modal Form -->
                 <div class="modal fade" id="{{ $idModal }}" tabindex="-1" wire:ignore.self>
@@ -66,31 +66,9 @@ use App\Enums\State;
 
             </div>
 
-            <div class="col-8">
-                @if (session()->has('message'))
-                    <div class="alert alert-success py-2 mb-3">
-                        {{ session('message') }}
-                    </div>
-                @endif
-                <div class="d-flex justify-content-end align-items-center gap-2">
-                    <button wire:click="exportExcel" class="btn btn-success">
-                        <i class="bi bi-file-earmark-excel me-1"></i> Export Format Excel
-                    </button>
-                    
-                    <form wire:submit="importExcel" class="d-flex align-items-center gap-2 m-0">
-                        <input type="file" wire:model="fileExcel" class="form-control" style="max-width: 250px;" required>
-                        <button type="submit" class="btn btn-primary" wire:loading.attr="disabled" wire:target="importExcel">
-                            <i class="bi bi-upload me-1"></i> Import
-                        </button>
-                    </form>
-                    
-                    @error('fileExcel') <span class="text-danger small">{{ $message }}</span> @enderror
-                </div>
+            <div class="col-6 d-flex justify-content-end">
+                <!--   <button wire:click="add" class="btn btn-primary me-3">Tambah Siswa</button> -->
             </div>
-
-            <!-- <div class="col-6 d-flex justify-content-end"> -->
-            <!--     <button wire:click="add" class="btn btn-primary me-3">Tambah Siswa</button> -->
-            <!-- </div> -->
         </div>
     </div>
 

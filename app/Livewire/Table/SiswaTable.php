@@ -11,11 +11,15 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\{WithNotify, WithModal};
 use App\Enums\State;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AlternatifExport;
+use App\Imports\AlternatifImport;
 
 #[Title('Siswa')]
 class SiswaTable extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
     use WithNotify;
     use WithModal;
 
@@ -25,7 +29,24 @@ class SiswaTable extends Component
     public SiswaForm $form;
 
     public string $search = '';
+    public $fileExcel;
 
+    public function exportExcel()
+    {
+        return Excel::download(new AlternatifExport, 'format_nilai_alternatif.xlsx');
+    }
+
+    public function importExcel()
+    {
+        $this->validate([
+            'fileExcel' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new AlternatifImport, $this->fileExcel->getRealPath());
+
+        $this->reset('fileExcel');
+        $this->notifySuccess('Data nilai alternatif berhasil diimport!');
+    }
 
     public function delete($id)
     {

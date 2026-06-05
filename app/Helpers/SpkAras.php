@@ -16,8 +16,8 @@ class SpkAras
 
     public function __construct()
     {
-        // Ambil kriteria dari database, diurutkan berdasarkan kode
-        $this->criteriaList = Kriteria::orderBy('prioritas')->get();
+        // Ambil kriteria dari database, diurutkan berdasarkan kode agar tampilan tabel rapi
+        $this->criteriaList = Kriteria::orderBy('kode')->get();
 
         // Ambil siswa yang memiliki nilai alternatif
         $this->siswaList = Siswa::query()->has('nilaiAlternatif')->with('nilaiAlternatif')->get();
@@ -59,9 +59,6 @@ class SpkAras
         return $this->siswaList;
     }
 
-    /**
-     * Hitung bobot ROC (Rank Order Centroid) untuk n kriteria
-     */
     private function hitungBobotROC()
     {
         $n = count($this->criteriaList);
@@ -70,12 +67,29 @@ class SpkAras
             return;
         }
 
+        // Urutkan kriteria berdasarkan skala prioritas (ascending: 1 = prioritas tertinggi)
+        $sortedCriteria = $this->criteriaList->sortBy('prioritas')->values();
+
+        // Hitung nilai bobot ROC (index 0 akan mendapat bobot terbesar)
+        $rocValues = [];
         for ($i = 1; $i <= $n; $i++) {
             $sum = 0;
             for ($j = $i; $j <= $n; $j++) {
                 $sum += 1 / $j;
             }
-            $this->weights[$i - 1] = round($sum / $n, 3);
+            $rocValues[$i - 1] = round($sum / $n, 3);
+        }
+
+        // Petakan bobot ROC ke masing-masing id_kriteria
+        $weightMap = [];
+        foreach ($sortedCriteria as $index => $kriteria) {
+            $weightMap[$kriteria->id_kriteria] = $rocValues[$index];
+        }
+
+        // Susun array $this->weights agar urutannya sama persis dengan $this->criteriaList
+        $this->weights = [];
+        foreach ($this->criteriaList as $kriteria) {
+            $this->weights[] = $weightMap[$kriteria->id_kriteria];
         }
     }
 
@@ -111,6 +125,13 @@ class SpkAras
         $criteriaCount = count($this->criteriaList);
 
         for ($j = 0; $j < $criteriaCount; $j++) {
+            // Jika nilai_optimal diatur oleh pengguna, gunakan nilai tersebut
+            if (!is_null($this->criteriaList[$j]->nilai_optimal)) {
+                $optimal[$j] = (float) $this->criteriaList[$j]->nilai_optimal;
+                continue;
+            }
+
+            // Jika tidak, hitung otomatis dari alternatif yang ada
             $colValues = array_column($matrix, $j);
 
             if ($this->criteriaTypes[$j] === 'benefit') {
@@ -119,14 +140,6 @@ class SpkAras
                 $optimal[$j] = min($colValues) == 0.0 ? 1 : min($colValues);
             }
         }
-
-//         $optimal = [
-// 0 => 100,
-// 1 => 93,
-// 2 => 4,
-// 3 => 1,
-// 4 => 4
-//         ];
 
         return $optimal;
     }

@@ -13,6 +13,7 @@ class KriteriaForm extends Form
     public string $nama = '';
     public string $tipe = 'benefit';
     public int $prioritas = 0;
+    public ?float $nilai_optimal = null;
 
     public function rules(): array
     {
@@ -21,6 +22,7 @@ class KriteriaForm extends Form
             'nama' => 'required|string|max:100',
             'tipe' => 'required|in:benefit,cost',
             'prioritas' => 'required|integer',
+            'nilai_optimal' => 'nullable|numeric',
         ];
     }
 
@@ -35,6 +37,7 @@ class KriteriaForm extends Form
             'tipe.in' => 'Tipe kriteria harus benefit atau cost.',
             'prioritas.required' => 'Prioritas kriteria harus diisi.',
             'prioritas.integer' => 'Prioritas kriteria harus berupa angka.',
+            'nilai_optimal.numeric' => 'Nilai optimal harus berupa angka.',
         ];
     }
 
@@ -57,5 +60,6 @@ class KriteriaForm extends Form
         $this->nama = $kriteria->nama;
         $this->tipe = $kriteria->tipe;
         $this->prioritas = $kriteria->prioritas;
+        $this->nilai_optimal = $kriteria->nilai_optimal;
     }
 }

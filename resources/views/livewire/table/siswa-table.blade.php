@@ -131,8 +131,19 @@ use App\Enums\State;
                 </div>
             </div>
 
-            <div class="col-6 d-flex justify-content-end">
-                <button wire:click="add" class="btn btn-primary me-3"><i class="bi bi-plus-circle me-1"></i>Tambah Siswa</button>
+            <div class="col-6 d-flex justify-content-end align-items-center gap-2">
+                <button wire:click="exportExcel" class="btn btn-success">
+                    <i class="bi bi-file-earmark-excel me-1"></i> Export
+                </button>
+                
+                <form wire:submit="importExcel" class="d-flex align-items-center gap-2 m-0">
+                    <input type="file" wire:model="fileExcel" class="form-control" style="max-width: 250px;" required>
+                    <button type="submit" class="btn btn-info text-white" wire:loading.attr="disabled" wire:target="importExcel">
+                        <i class="bi bi-upload me-1"></i> Import
+                    </button>
+                </form>
+                
+                <button wire:click="add" class="btn btn-primary ms-2"><i class="bi bi-plus-circle me-1"></i>Tambah Siswa</button>
             </div>
         </div>
     </div>

@@ -210,8 +210,8 @@
                 <thead class="table-light">
                     <tr>
                         <th>Alternatif</th>
-                        @foreach($spkData['criteriaList'] as $c)
-                            <th>{{ $c->kode }}</th>
+                        @foreach($spkData['criteriaList'] as $idx => $c)
+                            <th>{{ $c->kode }} (W: {{ $spkData['weights'][$idx] }})</th>
                         @endforeach
                     </tr>
                 </thead>

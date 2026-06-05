@@ -74,6 +74,21 @@ use App\Enums\State;
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="nilai_optimal">Nilai Optimal (Opsional)</label>
+                                                <input wire:model="form.nilai_optimal" type="number" step="0.01"
+                                                    class="form-control" id="nilai_optimal"
+                                                    placeholder="Biarkan kosong agar dihitung otomatis">
+                                                <small class="text-muted d-block mt-1">Jika diisi, nilai ini akan digunakan sebagai nilai A0 (Ideal). Jika kosong, sistem akan mengambil nilai min/max dari alternatif secara otomatis.</small>
+                                                @error('form.nilai_optimal')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -113,6 +128,7 @@ use App\Enums\State;
                         <th>Nama Kriteria</th>
                         <th>Tipe</th>
                         <th>Prioritas</th>
+                        <th>Nilai Optimal (A0)</th>
                         <th class="text-end">Aksi</th>
                     </tr>
                 </thead>
@@ -128,6 +144,7 @@ use App\Enums\State;
                                 </span>
                             </td>
                             <td>{{ $item->prioritas }}</td>
+                            <td>{{ $item->nilai_optimal ?? 'Otomatis' }}</td>
 
                             <td class="text-end">
                                 <button wire:click="edit({{ $item->id_kriteria }})" class="btn btn-warning"><i class="bi bi-pencil-square me-1"></i>Edit</button>

@@ -12,16 +12,12 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AlternatifExport;
-use App\Imports\AlternatifImport;
 
 #[Title('Nilai Alternatif')]
 class AlternatifTable extends Component
 {
 
-    use WithPagination, WithFileUploads;
+    use WithPagination;
     use WithNotify;
     use WithModal;
 
@@ -32,24 +28,6 @@ class AlternatifTable extends Component
     public AlternatifForm $form;
 
     public string $search = '';
-    public $fileExcel;
-
-    public function exportExcel()
-    {
-        return Excel::download(new AlternatifExport, 'format_nilai_alternatif.xlsx');
-    }
-
-    public function importExcel()
-    {
-        $this->validate([
-            'fileExcel' => 'required|mimes:xlsx,xls'
-        ]);
-
-        Excel::import(new AlternatifImport, $this->fileExcel->getRealPath());
-
-        $this->reset('fileExcel');
-        session()->flash('message', 'Data nilai alternatif berhasil diimport!');
-    }
 
     #[Computed]
     public function siswa() {
