@@ -29,7 +29,7 @@ use App\Enums\State;
         <div class="col-4">
             <div class="form-group">
                 <label for="nisn">NISN Siswa</label>
-                <input wire:model="form.nisn" type="text" class="form-control" id="nisn" 
+                <input wire:model="form.nisn" type="text" class="form-control" id="nisn"
 
                     @if ($currentState === \App\Enums\State::SHOW) disabled @endif>
                 @error('form.nisn')
@@ -81,7 +81,7 @@ use App\Enums\State;
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-6">
             <div class="form-group">
@@ -132,17 +132,6 @@ use App\Enums\State;
             </div>
 
             <div class="col-6 d-flex justify-content-end align-items-center gap-2">
-                <button wire:click="exportExcel" class="btn btn-success">
-                    <i class="bi bi-file-earmark-excel me-1"></i> Export
-                </button>
-                
-                <form wire:submit="importExcel" class="d-flex align-items-center gap-2 m-0">
-                    <input type="file" wire:model="fileExcel" class="form-control" style="max-width: 250px;" required>
-                    <button type="submit" class="btn btn-info text-white" wire:loading.attr="disabled" wire:target="importExcel">
-                        <i class="bi bi-upload me-1"></i> Import
-                    </button>
-                </form>
-                
                 <button wire:click="add" class="btn btn-primary ms-2"><i class="bi bi-plus-circle me-1"></i>Tambah Siswa</button>
             </div>
         </div>
